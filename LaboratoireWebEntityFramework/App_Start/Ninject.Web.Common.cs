@@ -11,6 +11,7 @@ namespace LaboratoireWebEntityFramework.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Ninject.Web.Common.WebHost;
+    using Infrastructure;
 
     public static class NinjectWebCommon 
     {
@@ -61,6 +62,14 @@ namespace LaboratoireWebEntityFramework.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-        }        
+
+            kernel.Bind<LaboratoireContext>()
+                .ToSelf()
+                .InRequestScope()
+                .Named("Context");
+
+            //kernel.Bind<ISession>().ToMethod(x => NHibernateHelper.OpenSession()).InRequestScope().Named("DatabaseDashboard");
+
+        }
     }
 }

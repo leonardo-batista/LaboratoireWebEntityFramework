@@ -2786,12 +2786,14 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductDetailController.cs" />
     <Compile Include="Controllers\TrackOrderController.cs" />
+    <Compile Include="DAO\CategorieDAO.cs" />
     <Compile Include="Filters\CacheResponseAttribute.cs" />
     <Compile Include="Filters\EnableCompressionAttribute.cs" />
     <Compile Include="Filters\HandleExceptionAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\LaboratoireContext.cs" />
     <Compile Include="Models\Class\Categorie.cs" />
     <Compile Include="Models\Enum\EDrapeau.cs" />
     <Compile Include="Models\Interface\ITable.cs" />
@@ -2942,8 +2944,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\ContextEF\" />
     <Folder Include="Outils\" />
+    <Folder Include="Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Translation.resx">

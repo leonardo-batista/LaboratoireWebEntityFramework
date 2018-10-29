@@ -13,10 +13,12 @@ namespace LaboratoireWebEntityFramework.Cartographie
         {
             ToTable("TB_CATEGORIE");
 
-            HasKey(x => x.Id);
-            Property(x => x.NomCaregorie);
-            Property(x => x.DateCreation);
-            Property(x => x.Actif);
+            HasKey(cat => cat.Id);
+            //Property(cat => cat.Id).HasColumnName("ID_CATEGORIE");
+
+            Property(cat => cat.NomCaregorie).HasColumnName("NOM_CATEGORIE");
+            Property(cat => cat.DateCreation).HasColumnName("DATE_CREATION");
+            Property(cat => cat.Actif).HasColumnName("ACTIF");
         }
     }
 }
