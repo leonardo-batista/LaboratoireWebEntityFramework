@@ -11,7 +11,7 @@ namespace LaboratoireWebEntityFramework.Cartographie
     {
         public CategorieMap()
         {
-            ToTable("TB_CATEGORIE]");
+            ToTable("TB_CATEGORIE");
 
             HasKey(x => x.Id);
             Property(x => x.NomCaregorie);
