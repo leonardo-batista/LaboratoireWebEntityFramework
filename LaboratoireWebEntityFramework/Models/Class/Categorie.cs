@@ -9,15 +9,7 @@ using System.Web;
 namespace LaboratoireWebEntityFramework.Models.Class
 {
     public class Categorie : ITable
-    //public class Categorie
     {
-        //[Key]
-        //[Column("ID_CATEGORIE")]
-        //public int Id { get; set; }
-        //public DateTime? DateCreation { get; set; }
-        //public bool Actif { get; set; }
-        //public string NomCaregorie { get; set; }
-
         protected Int32 id;
         protected DateTime? dateCreation;
         protected bool actif;

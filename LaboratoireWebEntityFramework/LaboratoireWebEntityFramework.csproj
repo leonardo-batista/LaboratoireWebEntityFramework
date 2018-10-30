@@ -2764,6 +2764,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Affaire\ProductAffaire.cs" />
     <Compile Include="App_GlobalResources\Translation.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2778,6 +2779,7 @@
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Cartographie\CategorieMap.cs" />
+    <Compile Include="Cartographie\ProduitMap.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\ChariotController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
@@ -2787,6 +2789,7 @@
     <Compile Include="Controllers\ProductDetailController.cs" />
     <Compile Include="Controllers\TrackOrderController.cs" />
     <Compile Include="DAO\CategorieDAO.cs" />
+    <Compile Include="DAO\ProduitDAO.cs" />
     <Compile Include="Filters\CacheResponseAttribute.cs" />
     <Compile Include="Filters\EnableCompressionAttribute.cs" />
     <Compile Include="Filters\HandleExceptionAttribute.cs" />
@@ -2795,6 +2798,9 @@
     </Compile>
     <Compile Include="Infrastructure\LaboratoireContext.cs" />
     <Compile Include="Models\Class\Categorie.cs" />
+    <Compile Include="Models\Class\Client.cs" />
+    <Compile Include="Models\Class\Produit.cs" />
+    <Compile Include="Models\Class\Utilisateur.cs" />
     <Compile Include="Models\Enum\EDrapeau.cs" />
     <Compile Include="Models\Interface\ITable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

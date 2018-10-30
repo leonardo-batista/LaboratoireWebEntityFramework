@@ -14,10 +14,35 @@ namespace LaboratoireWebEntityFramework.Controllers
     [EnableCompression]
     public class ProductController : Controller
     {
+        private JsonResult ThrowJsonError(Exception e)
+        {
+            Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+            return Json(new { Message = e.Message }, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Product
         public ActionResult Index()
         {
             return View();
         }
+
+        public JsonResult ListeCategorieProduit()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                return ThrowJsonError(ex);
+            }
+
+            return Json(new
+            {
+                dataResult = ""
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

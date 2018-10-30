@@ -9,6 +9,7 @@ namespace LaboratoireWebEntityFramework.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Ninject.Web.Common.WebHost;
+    using Repository;
     using Infrastructure;
 
     public static class NinjectWebCommon 
@@ -60,18 +61,21 @@ namespace LaboratoireWebEntityFramework.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-
-
-
             //ça marche très bien
             //kernel.Bind<LaboratoireContext>()
             //    .ToSelf()
             //    .InRequestScope()
             //    .Named("LaboratoireContext");
+            //kernel.Get<LaboratoireContext>("LaboratoireContext");
 
+            //kernel.Bind<LaboratoireContext>()
+            //    .ToSelf()
+            //    .InSingletonScope()
+            //    .Named("LaboratoireContext");
+            //kernel.Get<LaboratoireContext>("LaboratoireContext");
 
-            //kernel.Bind(typeof(IRepositoryContext<>)).To(typeof(RepositoryContext<>)).Named("LaboratoireContext");
-
+            //kernel.Bind<LaboratoireContext>().ToSelf().InRequestScope().Named("LaboratoireContext");
+            //kernel.Bind(typeof(IRepositoryContext<>)).To(typeof(RepositoryContext<>)).InRequestScope().Named("RepositoryContext");
         }
     }
 }

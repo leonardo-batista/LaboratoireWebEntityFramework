@@ -14,7 +14,6 @@ namespace LaboratoireWebEntityFramework.Cartographie
         {
             ToTable("TB_CATEGORIE");
 
-            //HasKey(cat => cat.Id);
             Property(cat => cat.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).HasColumnName("ID_CATEGORIE");
             Property(cat => cat.NomCaregorie).HasColumnName("NOM_CATEGORIE");
             Property(cat => cat.DateCreation).HasColumnName("DATE_CREATION").IsOptional().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
