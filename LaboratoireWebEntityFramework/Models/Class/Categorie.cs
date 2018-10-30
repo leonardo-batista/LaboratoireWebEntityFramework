@@ -1,23 +1,32 @@
 ﻿using LaboratoireWebEntityFramework.Models.Interface;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace LaboratoireWebEntityFramework.Models.Class
 {
     public class Categorie : ITable
+    //public class Categorie
     {
-        protected UInt64 idCategorie;
+        //[Key]
+        //[Column("ID_CATEGORIE")]
+        //public int Id { get; set; }
+        //public DateTime? DateCreation { get; set; }
+        //public bool Actif { get; set; }
+        //public string NomCaregorie { get; set; }
+
+        protected Int32 id;
         protected DateTime? dateCreation;
         protected bool actif;
         protected string nomCaregorie = string.Empty;
-        
 
-        public UInt64 Id
+        public Int32 Id
         {
-            get { return this.idCategorie; }
-            set { this.idCategorie = value; }
+            get { return this.id; }
+            set { this.id = value; }
         }
 
         public DateTime? DateCreation
