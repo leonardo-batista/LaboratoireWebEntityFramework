@@ -5,9 +5,7 @@ namespace LaboratoireWebEntityFramework.App_Start
 {
     using System;
     using System.Web;
-
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
     using Ninject;
     using Ninject.Web.Common;
     using Ninject.Web.Common.WebHost;
@@ -63,12 +61,16 @@ namespace LaboratoireWebEntityFramework.App_Start
         private static void RegisterServices(IKernel kernel)
         {
 
-            kernel.Bind<LaboratoireContext>()
-                .ToSelf()
-                .InRequestScope()
-                .Named("Context");
 
-            //kernel.Bind<ISession>().ToMethod(x => NHibernateHelper.OpenSession()).InRequestScope().Named("DatabaseDashboard");
+
+            //ça marche très bien
+            //kernel.Bind<LaboratoireContext>()
+            //    .ToSelf()
+            //    .InRequestScope()
+            //    .Named("LaboratoireContext");
+
+
+            //kernel.Bind(typeof(IRepositoryContext<>)).To(typeof(RepositoryContext<>)).Named("LaboratoireContext");
 
         }
     }
