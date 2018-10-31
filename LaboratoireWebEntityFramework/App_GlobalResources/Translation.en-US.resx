@@ -156,4 +156,7 @@
   <data name="RechercheProduits" xml:space="preserve">
     <value>Search products...</value>
   </data>
+  <data name="Tous" xml:space="preserve">
+    <value>All</value>
+  </data>
 </root>

@@ -1,6 +1,9 @@
 $(document).ready(function () {
     $.ajaxSetup({ cache: false });
 
+    //PAR CLICK
+
+
     //CHARGER TITRE PAR PAGE
     TitrePageWeb();
 
@@ -8,6 +11,7 @@ $(document).ready(function () {
 
     ListeDesCategoriePageProduct();
 
+    ProductsByCategoryAll();
 });
 
 function TitrePageWeb() {
@@ -71,7 +75,6 @@ function ListDesCategories() {
 
 function ListeDesCategoriePageProduct()
 {
-
     if ($("#indexProduct").length === 0) {
         return false;
     }
@@ -85,12 +88,18 @@ function ListeDesCategoriePageProduct()
         success: function (data) {
 
             if (data.dataResult !== null) {
+
+                htmlResultCategories += '<li class="p-t-4">' +
+                    '<a href="javascript:ProductsByCategory(0);" class="s-text13 active1">' +
+                        $('#texteCategoriesTous').val() +
+                        '</a></li>';
+
                 for (var count = 0; count < 5; count++) {
                     $('#idCategorie' + count).val(data.dataResult[count].Id);
                     $('#nomCategorie' + count).text(data.dataResult[count].NomCaregorie);
 
                     htmlResultCategories += '<li class="p-t-4">' +
-                        '<a href="#" class="s-text13 active1">' +
+                        '<a href="javascript:ProductsByCategory('+ data.dataResult[count].Id + ')" class="s-text13 active1">' +
                             data.dataResult[count].NomCaregorie +
                             '</a></li>';
                 }
@@ -121,7 +130,7 @@ function ListeDesCategoriePageProduct()
     return false;
 }
 
-function ProductDetail() {
+function ProductDetail(idProduct) {
 
     //if ($("#indexProductDetail").length === 0) {
     //    return false;
@@ -130,7 +139,7 @@ function ProductDetail() {
     $.ajax({
         url: '/Product/ProductDetail',
         type: 'GET',
-        data: { "idProduct": 1 },
+        data: { "idProduct": idProduct },
         dataType: 'json',
         success: function (data) {
 
@@ -156,21 +165,65 @@ function ProductDetail() {
     return false;
 }
 
-function ProductsByCategory() {
+function ProductsByCategory(idCategorie) {
 
-    //if ($("#indexProductCategory").length === 0) {
-    //    return false;
-    //}
+    if ($("#indexProduct").length === 0) {
+        return false;
+    }
+
+    if (idCategorie === 0) {
+        ProductsByCategoryAll();
+        return false;
+    }
+
+
+    var htmlResultAllProducts = '';
 
     $.ajax({
         url: '/Product/ListeDeProduitsParCategorie',
         type: 'GET',
-        data: { "idCategorie": 1 },
+        data: { "idCategorie": idCategorie },
         dataType: 'json',
         success: function (data) {
 
-            console.log(data);
+            if (data.dataResult !== null) {
 
+                $("#listeDesProduits").empty();
+
+                for (var count = 0; count < data.dataResult.length; count++) {                    
+                    htmlResultAllProducts += '<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">'
+                        + '<div class="block2">'
+                        + '    <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">'
+                        + '        <img src="/Content/images/' + (data.dataResult[count].Sku === null ? 'pas_dImage' : data.dataResult[count].Sku) + '.jpg" alt="IMG-PRODUCT">'
+                        + '        <div class="block2-overlay trans-0-4">'
+                        + '           <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">'
+                        + '                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>'
+                        + '                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>'
+                        + '            </a>'
+                        + '            <div class="block2-btn-addcart w-size1 trans-0-4">'
+                        + '               <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">'
+                        + '                 ' + $('#texteButtonChariot').val()
+                        + '                </button>'
+                        + '            </div>'
+                        + '        </div>'
+                        + '    </div>'
+                        + '    <div class="block2-txt p-t-20">'
+                        + '        <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">'
+                        + '            ' + data.dataResult[count].NomProduit
+                        + '        </a>'
+                        + '       <span class="block2-price m-text6 p-r-5">'
+                        + '           $' + data.dataResult[count].Valeur
+                        + '        </span>'
+                        + '    </div>'
+                        + ' </div>'
+                        + '</div>'
+                }
+
+                $('#listeDesProduits').append(htmlResultAllProducts);
+
+            } else {
+                $('#listeDesProduits').append(htmlResultAllProducts);
+            }
         },
 
         error: function (erro) {
@@ -193,14 +246,56 @@ function ProductsByCategory() {
 }
 
 function ProductsByCategoryAll() {
+
+    if ($("#indexProduct").length === 0) {
+        return false;
+    }
+
+    var htmlResultAllProducts = '';
+
     $.ajax({
         url: '/Product/ListeDeProduitsParCategorieTous',
         type: 'GET',
         dataType: 'json',
         success: function (data) {
 
-            console.log(data);
+            $("#listeDesProduits").empty();
 
+            if (data.dataResult !== null) {
+                for (var count = 0; count < data.dataResult.length; count++) {                    
+                    htmlResultAllProducts += '<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">'
+                        + '<div class="block2">'
+                        + '    <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">'
+                        + '        <img src="/Content/images/' + (data.dataResult[count].Sku === null ? 'pas_dImage' : data.dataResult[count].Sku) + '.jpg" alt="IMG-PRODUCT">'
+                        + '        <div class="block2-overlay trans-0-4">'
+                        + '           <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">'
+                        + '                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>'
+                        + '                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>'
+                        + '            </a>'
+                        + '            <div class="block2-btn-addcart w-size1 trans-0-4">'
+                        + '               <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">'
+                        + '                 ' + $('#texteButtonChariot').val()
+                        + '                </button>'
+                        + '            </div>'
+                        + '        </div>'
+                        + '    </div>'
+                        + '    <div class="block2-txt p-t-20">'
+                        + '        <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">'
+                        + '            ' + data.dataResult[count].NomProduit
+                        + '        </a>'
+                        + '       <span class="block2-price m-text6 p-r-5">'
+                        + '           $' + data.dataResult[count].Valeur
+                        + '        </span>'
+                        + '    </div>'
+                        + ' </div>'
+                        + '</div>'
+                }
+
+                $('#listeDesProduits').append(htmlResultAllProducts);
+
+            } else {
+                $('#listeDesProduits').append(htmlResultAllProducts);
+            }
         },
 
         error: function (erro) {

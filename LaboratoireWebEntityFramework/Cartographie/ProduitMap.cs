@@ -20,6 +20,8 @@ namespace LaboratoireWebEntityFramework.Cartographie
             Property(prd => prd.NomProduit).HasColumnName("NOM_PRODUIT");
             Property(prd => prd.Description).HasColumnName("DESCRIPTION");
             Property(prd => prd.FicheTechnique).HasColumnName("FICHE_TECHNIQUE");
+            Property(prd => prd.Valeur).HasColumnName("VALEUR");
+            Property(prd => prd.Sku).HasColumnName("SKU");
             Property(prd => prd.DateCreation).HasColumnName("DATE_CREATION").IsOptional().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
             Property(prd => prd.Actif).HasColumnName("ACTIF");
         }

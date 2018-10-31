@@ -14,6 +14,8 @@ namespace LaboratoireWebEntityFramework.Models.Class
         protected string nomProduit = string.Empty;
         protected string description = string.Empty;
         protected string ficheTechnique = string.Empty;
+        protected decimal valeur;
+        protected string sku = string.Empty;
         protected DateTime? dateCreation;
         protected bool actif;
 
@@ -51,6 +53,18 @@ namespace LaboratoireWebEntityFramework.Models.Class
         {
             get { return this.ficheTechnique; }
             set { this.ficheTechnique = value; }
+        }
+
+        public decimal Valeur
+        {
+            get { return this.valeur; }
+            set { this.valeur = value; }
+        }
+
+        public string Sku
+        {
+            get { return this.sku; }
+            set { this.sku = value; }
         }
 
         public bool Actif

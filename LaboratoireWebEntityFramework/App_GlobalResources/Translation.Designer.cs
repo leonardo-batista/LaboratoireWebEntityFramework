@@ -176,5 +176,14 @@ namespace Resources {
                 return ResourceManager.GetString("RechercheProduits", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tous.
+        /// </summary>
+        internal static string Tous {
+            get {
+                return ResourceManager.GetString("Tous", resourceCulture);
+            }
+        }
     }
 }
