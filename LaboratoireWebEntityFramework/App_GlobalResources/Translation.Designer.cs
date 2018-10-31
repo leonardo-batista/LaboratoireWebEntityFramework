@@ -70,6 +70,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Achetez Déjà.
+        /// </summary>
+        internal static string AchetezMaintenant {
+            get {
+                return ResourceManager.GetString("AchetezMaintenant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ajouter.
+        /// </summary>
+        internal static string AjouterChariot {
+            get {
+                return ResourceManager.GetString("AjouterChariot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to À propos.
         /// </summary>
         internal static string Apropos {
@@ -79,11 +97,83 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Boutique.
+        /// </summary>
+        internal static string Boutique {
+            get {
+                return ResourceManager.GetString("Boutique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Categories.
+        /// </summary>
+        internal static string Categories {
+            get {
+                return ResourceManager.GetString("Categories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact.
         /// </summary>
         internal static string Contact {
             get {
                 return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filtre.
+        /// </summary>
+        internal static string Filtre {
+            get {
+                return ResourceManager.GetString("Filtre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filtres.
+        /// </summary>
+        internal static string Filtres {
+            get {
+                return ResourceManager.GetString("Filtres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Intervalle.
+        /// </summary>
+        internal static string Intervalle {
+            get {
+                return ResourceManager.GetString("Intervalle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nouveau.
+        /// </summary>
+        internal static string Nouveau {
+            get {
+                return ResourceManager.GetString("Nouveau", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prix.
+        /// </summary>
+        internal static string Prix {
+            get {
+                return ResourceManager.GetString("Prix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recherche de produits....
+        /// </summary>
+        internal static string RechercheProduits {
+            get {
+                return ResourceManager.GetString("RechercheProduits", resourceCulture);
             }
         }
     }

@@ -120,10 +120,40 @@
   <data name="Accueil" xml:space="preserve">
     <value>Accueil</value>
   </data>
+  <data name="AchetezMaintenant" xml:space="preserve">
+    <value>Achetez Déjà</value>
+  </data>
+  <data name="AjouterChariot" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
   <data name="Apropos" xml:space="preserve">
     <value>À propos</value>
   </data>
+  <data name="Boutique" xml:space="preserve">
+    <value>Boutique</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
+  </data>
+  <data name="Filtre" xml:space="preserve">
+    <value>Filtre</value>
+  </data>
+  <data name="Filtres" xml:space="preserve">
+    <value>Filtres</value>
+  </data>
+  <data name="Intervalle" xml:space="preserve">
+    <value>Intervalle</value>
+  </data>
+  <data name="Nouveau" xml:space="preserve">
+    <value>Nouveau</value>
+  </data>
+  <data name="Prix" xml:space="preserve">
+    <value>Prix</value>
+  </data>
+  <data name="RechercheProduits" xml:space="preserve">
+    <value>Recherche de produits...</value>
   </data>
 </root>

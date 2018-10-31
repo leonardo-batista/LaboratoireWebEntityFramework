@@ -2785,6 +2785,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\FaqController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductByCategoryController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductDetailController.cs" />
     <Compile Include="Controllers\TrackOrderController.cs" />
@@ -2943,6 +2944,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Translation.en-US.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="Views\ProductByCategory\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

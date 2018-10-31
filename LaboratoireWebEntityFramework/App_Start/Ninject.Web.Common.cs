@@ -62,10 +62,11 @@ namespace LaboratoireWebEntityFramework.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             //ça marche très bien
-            //kernel.Bind<LaboratoireContext>()
-            //    .ToSelf()
-            //    .InRequestScope()
-            //    .Named("LaboratoireContext");
+            kernel.Bind<LaboratoireContext>()
+                .ToSelf()
+                .InRequestScope()
+                .Named("LaboratoireContext");
+
             //kernel.Get<LaboratoireContext>("LaboratoireContext");
 
             //kernel.Bind<LaboratoireContext>()

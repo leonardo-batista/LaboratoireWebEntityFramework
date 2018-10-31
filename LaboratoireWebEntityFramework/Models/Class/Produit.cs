@@ -9,6 +9,8 @@ namespace LaboratoireWebEntityFramework.Models.Class
     public class Produit : ITable
     {
         protected Int32 id;
+        protected Int32 idCategorie;
+        protected Int32 idMarque;
         protected string nomProduit = string.Empty;
         protected string description = string.Empty;
         protected string ficheTechnique = string.Empty;
@@ -19,6 +21,18 @@ namespace LaboratoireWebEntityFramework.Models.Class
         {
             get { return this.id; }
             set { this.id = value; }
+        }
+
+        public Int32 IdCategorie
+        {
+            get { return this.idCategorie; }
+            set { this.idCategorie = value; }
+        }
+
+        public Int32 IdMarque
+        {
+            get { return this.idMarque; }
+            set { this.idMarque = value; }
         }
 
         public string NomProduit

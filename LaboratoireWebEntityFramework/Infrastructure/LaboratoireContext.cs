@@ -14,6 +14,7 @@ namespace LaboratoireWebEntityFramework.Infrastructure
         }
 
         public DbSet<Categorie> Categories { get; set; }
+        public DbSet<Produit> Produits { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -22,6 +23,7 @@ namespace LaboratoireWebEntityFramework.Infrastructure
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
             modelBuilder.Configurations.Add(new CategorieMap());
+            modelBuilder.Configurations.Add(new ProduitMap());
         }
 
     }

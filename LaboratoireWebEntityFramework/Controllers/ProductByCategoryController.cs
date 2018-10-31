@@ -12,13 +12,12 @@ namespace LaboratoireWebEntityFramework.Controllers
     [CacheResponse]
     [HandleExceptionAttribute]
     [EnableCompression]
-    public class ProductDetailController : Controller
+    public class ProductByCategoryController : Controller
     {
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
-
     }
 }

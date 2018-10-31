@@ -4,6 +4,7 @@ using LaboratoireWebEntityFramework.Models.Class;
 using LaboratoireWebEntityFramework.Repository;
 using System.Runtime.InteropServices;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace LaboratoireWebEntityFramework.Controllers
 {
@@ -13,7 +14,8 @@ namespace LaboratoireWebEntityFramework.Controllers
     [EnableCompression]
     public class HomeController : Controller
     {
-        // GET: Home
+        [HttpGet]
+        [OutputCache(Duration = 3600, VaryByParam = "none", Location = OutputCacheLocation.Server)]
         public ActionResult Index()
         {
             return View();

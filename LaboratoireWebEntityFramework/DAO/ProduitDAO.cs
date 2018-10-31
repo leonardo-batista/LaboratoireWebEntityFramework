@@ -1,4 +1,5 @@
-﻿using LaboratoireWebEntityFramework.Models.Class;
+﻿using LaboratoireWebEntityFramework.Infrastructure;
+using LaboratoireWebEntityFramework.Models.Class;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,48 @@ namespace LaboratoireWebEntityFramework.DAO
 {
     public class ProduitDAO
     {
-        public List<Categorie> ListeDeCategorie()
+        private LaboratoireContext context;
+
+        public ProduitDAO(LaboratoireContext context)
+        {
+            this.context = context;
+        }
+
+        public Produit Detail(int idProduit)
         {
             try
             {
-                return null;
+                return context.Produits.Where(prd => prd.Id == idProduit).FirstOrDefault<Produit>();
             }
             catch (Exception ex)
             {
                 throw ex;
-            }    
+            }
         }
+
+        public List<Produit> ListeDeProduitParCategorie()
+        {
+            try
+            {
+                return context.Produits.Where(prd => prd.Actif == true).OrderBy(prd => prd.NomProduit).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<Produit> ListeDeProduitParCategorie(int idCategorie)
+        {
+            try
+            {
+                return context.Produits.Where(prd => prd.Actif == true && prd.IdCategorie == idCategorie).OrderBy(prd => prd.NomProduit).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
