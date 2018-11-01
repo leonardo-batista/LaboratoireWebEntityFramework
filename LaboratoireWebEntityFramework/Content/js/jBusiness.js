@@ -7,11 +7,14 @@ $(document).ready(function () {
     //CHARGER TITRE PAR PAGE
     TitrePageWeb();
 
+    //PAGE HOMME
     ListDesCategories();
+
+    //PAGE PRODUCT
+    ProductsByCategoryAll();
 
     ListeDesCategoriePageProduct();
 
-    ProductsByCategoryAll();
 });
 
 function TitrePageWeb() {
@@ -34,11 +37,14 @@ function TitrePageWeb() {
 
 }
 
+//PAGE HOME
 function ListDesCategories() {
 
     if ($("#indexHome").length === 0) {
         return false;
     }
+
+    $.removeCookie("CategorieIdTemporaire");
 
     $.ajax({
         url: '/Product/ListeCategorieProduit',
@@ -48,6 +54,7 @@ function ListDesCategories() {
 
             if (data.dataResult !== null) {
                 for (var count = 0; count < 5; count++) {
+                    $("#linkCategorie" + count).attr("href", "javascript:EnregistrerLoptiondeCagegorie(" + data.dataResult[count].Id + ")");
                     $('#idCategorie' + count).val(data.dataResult[count].Id);
                     $('#nomCategorie' + count).text(data.dataResult[count].NomCaregorie);
                 }
@@ -73,6 +80,12 @@ function ListDesCategories() {
     return false;
 }
 
+function EnregistrerLoptiondeCagegorie(idCategorieTemp) {
+    $.cookie("CategorieIdTemporaire", idCategorieTemp);
+    window.location.href = "/Product";
+}
+
+//PAGE PRODUCT
 function ListeDesCategoriePageProduct()
 {
     if ($("#indexProduct").length === 0) {
@@ -131,10 +144,6 @@ function ListeDesCategoriePageProduct()
 }
 
 function ProductDetail(idProduct) {
-
-    //if ($("#indexProductDetail").length === 0) {
-    //    return false;
-    //}
 
     $.ajax({
         url: '/Product/ProductDetail',
@@ -232,14 +241,15 @@ function ProductsByCategory(idCategorie) {
                 sweetAlert($('#msgError').val(), erro.Message, 'error');
 
             }
-            catch (err) {
-                err = JSON.parse(err);
+            catch (erro) {
+                erro = JSON.parse(erro);
                 sweetAlert($('#msgError').val(), erro.Message, 'error');
             }
         },
 
         complete: function () {
             //Quelque chose ici, si necessaire !!!
+            $.removeCookie("CategorieIdTemporaire");
         }
     });
     return false;
@@ -250,6 +260,17 @@ function ProductsByCategoryAll() {
     if ($("#indexProduct").length === 0) {
         return false;
     }
+
+    if ($.cookie('CategorieIdTemporaire') !== null || $.cookie('CategorieIdTemporaire') !== 'undefined' || $.cookie('CategorieIdTemporaire') !== '' || $.cookie('CategorieIdTemporaire') !== 0) {
+        if (!isNaN($.cookie('CategorieIdTemporaire'))) {
+            ProductsByCategory($.cookie('CategorieIdTemporaire'));
+            return;
+        } else {
+            $.removeCookie("CategorieIdTemporaire");
+        }
+    }
+
+
 
     var htmlResultAllProducts = '';
 
@@ -312,7 +333,9 @@ function ProductsByCategoryAll() {
 
         complete: function () {
             //Quelque chose ici, si necessaire !!!
+            $.removeCookie("CategorieIdTemporaire");
         }
     });
     return false;
 }
+

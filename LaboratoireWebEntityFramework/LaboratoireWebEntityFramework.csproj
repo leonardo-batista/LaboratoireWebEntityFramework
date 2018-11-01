@@ -2612,6 +2612,7 @@
     <Content Include="Content\images\E1000.jpg" />
     <Content Include="Content\images\E1150.jpg" />
     <Content Include="Content\images\E1250.jpg" />
+    <Content Include="Content\images\Eletromeager_720_932.jpg" />
     <Content Include="Content\images\gallery-01.jpg" />
     <Content Include="Content\images\gallery-02.jpg" />
     <Content Include="Content\images\gallery-03.jpg" />
@@ -2645,6 +2646,8 @@
     <Content Include="Content\images\icons\paypal.png" />
     <Content Include="Content\images\icons\video-16-9.jpg" />
     <Content Include="Content\images\icons\visa.png" />
+    <Content Include="Content\images\Informatique_720_660.jpg" />
+    <Content Include="Content\images\Informatique_720_932.jpg" />
     <Content Include="Content\images\item-01.jpg" />
     <Content Include="Content\images\item-02.jpg" />
     <Content Include="Content\images\item-03.jpg" />
@@ -2680,20 +2683,28 @@
     <Content Include="Content\images\master-slide-06.jpg" />
     <Content Include="Content\images\master-slide-07.jpg" />
     <Content Include="Content\images\master-slide-08.jpg" />
+    <Content Include="Content\images\Meuble_1920_239.jpg" />
+    <Content Include="Content\images\Meuble_720_660.jpg" />
+    <Content Include="Content\images\Meuble_720_932.jpg" />
     <Content Include="Content\images\pas_dImage.jpg" />
     <Content Include="Content\images\product-detail-01.jpg" />
     <Content Include="Content\images\product-detail-02.jpg" />
     <Content Include="Content\images\product-detail-03.jpg" />
     <Content Include="Content\images\SC8574.jpg" />
     <Content Include="Content\images\shop-item-09.jpg" />
+    <Content Include="Content\images\Sport_720_932.jpg" />
     <Content Include="Content\images\thumb-item-01.jpg" />
     <Content Include="Content\images\thumb-item-02.jpg" />
     <Content Include="Content\images\thumb-item-03.jpg" />
     <Content Include="Content\images\Untitled-5.jpg" />
+    <Content Include="Content\images\Vetement_720_932.jpg" />
     <Content Include="Content\images\W1111.jpg" />
     <Content Include="Content\images\ZP2512.jpg" />
     <Content Include="Content\includes\contact-form.php" />
     <Content Include="Content\js\jBusiness.js" />
+    <Content Include="Content\js\jBusiness.min.js">
+      <DependentUpon>jBusiness.js</DependentUpon>
+    </Content>
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\main.min.js" />
     <Content Include="Content\js\map-custom.js" />
@@ -2741,6 +2752,10 @@
     <Content Include="Content\vendor\jqueryui\jquery-ui.theme.css" />
     <Content Include="Content\vendor\jqueryui\jquery-ui.theme.min.css" />
     <Content Include="Content\vendor\jquery\jquery-3.2.1.min.js" />
+    <Content Include="Content\vendor\jquery\jquery.cookie.js" />
+    <Content Include="Content\vendor\jquery\jquery.cookie.min.js">
+      <DependentUpon>jquery.cookie.js</DependentUpon>
+    </Content>
     <Content Include="Content\vendor\lightbox2\css\lightbox.css" />
     <Content Include="Content\vendor\lightbox2\css\lightbox.min.css" />
     <Content Include="Content\vendor\lightbox2\images\close.png" />
@@ -2956,6 +2971,7 @@
       <LastGenOutput>Translation.en-US.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Content Include="Views\ProductByCategory\Index.cshtml" />
+    <None Include="bundleconfig.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

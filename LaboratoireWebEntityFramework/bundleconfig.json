@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "Content/js/jBusiness.min.js",
+    "inputFiles": [
+      "Content/js/jBusiness.js"
+    ]
+  },
+  {
+    "outputFileName": "Content/vendor/jquery/jquery.cookie.min.js",
+    "inputFiles": [
+      "Content/vendor/jquery/jquery.cookie.js"
+    ]
+  }
+]

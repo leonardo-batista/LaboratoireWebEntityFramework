@@ -151,6 +151,42 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Meuble.
+        /// </summary>
+        internal static string Meuble {
+            get {
+                return ResourceManager.GetString("Meuble", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alert.
+        /// </summary>
+        internal static string msgAlerte {
+            get {
+                return ResourceManager.GetString("msgAlerte", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Erreur.
+        /// </summary>
+        internal static string msgErreur {
+            get {
+                return ResourceManager.GetString("msgErreur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        internal static string msgInformation {
+            get {
+                return ResourceManager.GetString("msgInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nouveau.
         /// </summary>
         internal static string Nouveau {

@@ -147,6 +147,18 @@
   <data name="Intervalle" xml:space="preserve">
     <value>Range</value>
   </data>
+  <data name="Meuble" xml:space="preserve">
+    <value>Furniture</value>
+  </data>
+  <data name="msgAlerte" xml:space="preserve">
+    <value>Alert</value>
+  </data>
+  <data name="msgErreur" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="msgInformation" xml:space="preserve">
+    <value>Information</value>
+  </data>
   <data name="Nouveau" xml:space="preserve">
     <value>New</value>
   </data>
