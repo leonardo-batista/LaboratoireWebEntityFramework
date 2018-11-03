@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chariot.
+        /// </summary>
+        internal static string Chariot {
+            get {
+                return ResourceManager.GetString("Chariot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact.
         /// </summary>
         internal static string Contact {
@@ -201,6 +210,24 @@ namespace Resources {
         internal static string Prix {
             get {
                 return ResourceManager.GetString("Prix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Produit.
+        /// </summary>
+        internal static string Produit {
+            get {
+                return ResourceManager.GetString("Produit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantite.
+        /// </summary>
+        internal static string Quantite {
+            get {
+                return ResourceManager.GetString("Quantite", resourceCulture);
             }
         }
         

@@ -20,7 +20,7 @@ namespace LaboratoireWebEntityFramework.DAO
         {
             try
             {
-                return context.Produits.Where(prd => prd.Id == idProduit).FirstOrDefault<Produit>();
+                return context.Produits_.Where(prd => prd.Id_Produit == idProduit).FirstOrDefault<Produit>();
             }
             catch (Exception ex)
             {
@@ -32,7 +32,7 @@ namespace LaboratoireWebEntityFramework.DAO
         {
             try
             {
-                return context.Produits.Where(prd => prd.Actif == true).OrderBy(prd => prd.NomProduit).ToList();
+                return context.Produits_.Where(prd => prd.Actif == true).OrderBy(prd => prd.NomProduit).ToList();
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ namespace LaboratoireWebEntityFramework.DAO
         {
             try
             {
-                return context.Produits.Where(prd => prd.Actif == true && prd.IdCategorie == idCategorie).OrderBy(prd => prd.NomProduit).ToList();
+                return context.Produits_.Where(prd => prd.Actif == true && prd.IdCategorie == idCategorie).OrderBy(prd => prd.NomProduit).ToList();
             }
             catch (Exception ex)
             {

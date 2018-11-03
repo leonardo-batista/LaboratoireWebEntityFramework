@@ -20,7 +20,7 @@ namespace LaboratoireWebEntityFramework.DAO
         {
             try
             {
-                return context.Categories.OrderBy(c => c.NomCaregorie).Where(c => c.Actif == true).ToList();
+                return context.Categories_.OrderBy(c => c.NomCaregorie).Where(c => c.Actif == true).ToList();
             }
             catch (Exception ex)
             {

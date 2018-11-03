@@ -14,7 +14,8 @@ namespace LaboratoireWebEntityFramework.Cartographie
         {
             ToTable("TB_PRODUIT");
 
-            Property(prd => prd.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).HasColumnName("ID_PRODUIT");
+            HasKey(prd => prd.Id_Produit);
+            //Property(prd => prd.Id_Produit).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).HasColumnName("ID_PRODUIT");
             Property(prd => prd.IdCategorie).HasColumnName("ID_CATEGORIE");
             Property(prd => prd.IdMarque).HasColumnName("ID_MARQUE");
             Property(prd => prd.NomProduit).HasColumnName("NOM_PRODUIT");
@@ -27,3 +28,4 @@ namespace LaboratoireWebEntityFramework.Cartographie
         }
     }
 }
+

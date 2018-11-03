@@ -171,4 +171,13 @@
   <data name="Tous" xml:space="preserve">
     <value>Tous</value>
   </data>
+  <data name="Chariot" xml:space="preserve">
+    <value>Chariot</value>
+  </data>
+  <data name="Produit" xml:space="preserve">
+    <value>Produit</value>
+  </data>
+  <data name="Quantite" xml:space="preserve">
+    <value>Quantite</value>
+  </data>
 </root>
