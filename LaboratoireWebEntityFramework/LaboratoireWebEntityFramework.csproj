@@ -2707,6 +2707,7 @@
     <Content Include="Content\images\W1111.jpg" />
     <Content Include="Content\images\ZP2512.jpg" />
     <Content Include="Content\includes\contact-form.php" />
+    <Content Include="Content\js\currency.min.js" />
     <Content Include="Content\js\jBusiness.js" />
     <Content Include="Content\js\jBusiness.min.js">
       <DependentUpon>jBusiness.js</DependentUpon>

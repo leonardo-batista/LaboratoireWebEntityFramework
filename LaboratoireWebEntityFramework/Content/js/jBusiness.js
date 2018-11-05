@@ -1,9 +1,6 @@
 $(document).ready(function () {
     $.ajaxSetup({ cache: false });
 
-    //PAR CLICK
-
-
     //CHARGER TITRE PAR PAGE
     TitrePageWeb();
 
@@ -18,7 +15,7 @@ $(document).ready(function () {
     ListeDesCategoriePageProduct();
 
     //PAGE CHARIOT
-    ChariotConsommateur();
+    ChariotConsomateurPage();
 
 });
 
@@ -308,8 +305,6 @@ function ProductsByCategoryAll() {
         }
     }
 
-
-
     var htmlResultAllProducts = '';
 
     $.ajax({
@@ -343,7 +338,7 @@ function ProductsByCategoryAll() {
                         + '            ' + data.dataResult[count].NomProduit
                         + '        </a>'
                         + '       <span class="block2-price m-text6 p-r-5">'
-                        + '           $' + data.dataResult[count].Valeur
+                        + '           $' + currency(data.dataResult[count].Valeur)
                         + '        </span>'
                         + '    </div>'
                         + ' </div>'
@@ -378,180 +373,251 @@ function ProductsByCategoryAll() {
 }
 
 //PAGE CHARIOT
-function ChariotConsommateur(idConsommateur) {
+function ChariotConsomateurPage() {
 
     if ($("#indexChariot").length === 0) {
         return false;
     }
 
-    if (idConsommateur === null || idConsommateur === undefined) {
+    var resultaChariotConsommateur = ChariotConsommateurProduits('84BE5F20-8D85-4B02-B86E-0D301E033EEF');
+
+    ChariotConsommateurPetit(resultaChariotConsommateur);
+
+    ChariotConsommateur(resultaChariotConsommateur);
+
+}
+
+function ChariotConsommateur(resultaChariotConsommateur) {
+
+    if ($("#indexChariot").length === 0) {
         return false;
     }
 
     var htmlResultChariotConsommateur = '';
     var valeurSubTotalChariot = 0;
 
-    $.ajax({
+        $("#chariotConsommateur").empty();
+
+        if (resultaChariotConsommateur.responseJSON.dataResult !== null || resultaChariotConsommateur.responseJSON.dataResult !== '') {
+
+            htmlResultChariotConsommateur = '<div class="container-table-cart pos-relative">'
+                                                + '<div class="wrap-table-shopping-cart bgwhite">'
+                                                + '  <table class="table-shopping-cart">'
+                                                + '        <tr class="table-head">'
+                                                + '            <th class="column-1"></th>'
+                                                + '            <th class="column-2">' + $('#labelProduit').val() + '</th>'
+                                                + '            <th class="column-3">' + $('#labelPrix').val() + '</th>'
+                                                + '            <th class="column-4 p-l-70">' + $('#labelQuantite').val() + '</th>'
+                                                + '            <th class="column-5">Total</th>'
+                                                + '        </tr>';
+
+            for (var count = 0; count < resultaChariotConsommateur.responseJSON.dataResult.length; count++) {
+
+                htmlResultChariotConsommateur += '<tr class="table-row">'
+                                                    + '   <td class="column-1">'
+                                                    + '       <div class="cart-img-product b-rad-4 o-f-hidden">'
+                                                    + '           <img src="/Content/images/' + (resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Sku === null ? 'pas_dImage' : resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Sku) + '.jpg" alt="IMG-PRODUCT">'
+                                                    + '       </div>'
+                                                    + '   </td>'
+                                                    + '   <td class="column-2">' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.NomProduit + '</td>'
+                                                    + '   <td class="column-3">$' + currency(resultaChariotConsommateur.responseJSON.dataResult[count].ValeurUnitaire) + '</td>'
+                                                    + '   <td class="column-4">'
+                                                    + '       <div class="flex-w bo5 of-hidden w-size17">'
+                                                    + '           <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">'
+                                                    + '               <i class="fs-12 fa fa-minus" aria-hidden="true"></i>'
+                                                    + '           </button>'
+                                                    + '           <input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="' + resultaChariotConsommateur.responseJSON.dataResult[count].Quantite + '">'
+                                                    + '           <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">'
+                                                    + '               <i class="fs-12 fa fa-plus" aria-hidden="true"></i>'
+                                                    + '           </button>'
+                                                    + '       </div>'
+                                                    + '   </td>'
+                                                    + '   <td class="column-5">$' + currency(resultaChariotConsommateur.responseJSON.dataResult[count].ValeurTotalArticle) + '</td>'
+                                                    + '</tr>';
+
+                valeurSubTotalChariot = valeurSubTotalChariot + resultaChariotConsommateur.responseJSON.dataResult[count].ValeurTotalArticle;
+            }
+
+            htmlResultChariotConsommateur += '</table>'
+                                                + '   </div>'
+                                                + ' </div>';
+
+            htmlResultChariotConsommateur += '<div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">'
+                                                + '   <div class="flex-w flex-m w-full-sm">'
+                                                + '       <div class="size11 bo4 m-r-10">'
+                                                + '           <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="coupon-code" placeholder="Coupon Code">'
+                                                + '       </div>'
+                                                + '       <div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">'
+                                                + '           <!-- Button -->'
+                                                + '           <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">'
+                                                + '               Apply coupon'
+                                                + '           </button>'
+                                                + '       </div>'
+                                                + '   </div>'
+                                                + '   <div class="size10 trans-0-4 m-t-10 m-b-10">'
+                                                + '       <!-- Button -->'
+                                                + '       <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">'
+                                                + '           Update Cart'
+                                                + '       </button>'
+                                                + '   </div>'
+                                                + ' </div>'
+                                                + ' <!-- Total -->'
+                                                + ' <div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">'
+                                                + '    <h5 class="m-text20 p-b-24">'
+                                                + '        Cart Totals'
+                                                + '    </h5>'
+                                                + '    <div class="flex-w flex-sb-m p-b-12">'
+                                                + '        <span class="s-text18 w-size19 w-full-sm">'
+                                                + '            Subtotal:'
+                                                + '        </span>'
+                                                + '       <span class="m-text21 w-size20 w-full-sm">'
+                                                + '            $' + currency(valeurSubTotalChariot)
+                                                + '        </span>'
+                                                + '    </div>'
+                                                + '    <!--  -->'
+                                                + '    <div class="flex-w flex-sb bo10 p-t-15 p-b-20">'
+                                                + '        <span class="s-text18 w-size19 w-full-sm">'
+                                                + '            Shipping:'
+                                                + '        </span>'
+                                                + '        <div class="w-size20 w-full-sm">'
+                                                + '            <p class="s-text8 p-b-23">'
+                                                + '                There are no shipping methods available. Please double check your address, or contact us if you need any help.'
+                                                + '           </p>'
+                                                + '            <span class="s-text19">'
+                                                + '                Calculate Shipping'
+                                                + '            </span>'
+                                                + '            <div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">'
+                                                + '                <select class="selection-2" name="country">'
+                                                + '                    <option>Select a country...</option>'
+                                                + '                    <option>CA</option>'
+                                                + '                    <option>US</option>'
+                                                + '               </select>'
+                                                + '            </div>'
+                                                + '            <div class="size13 bo4 m-b-12">'
+                                                + '                <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="state" placeholder="State /  country">'
+                                                + '            </div>'
+                                                + '            <div class="size13 bo4 m-b-22">'
+                                                + '                <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="postcode" placeholder="Postcode / Zip">'
+                                                + '            </div>'
+                                                + '            <div class="size14 trans-0-4 m-b-10">'
+                                                + '                <!-- Button -->'
+                                                + '                <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">'
+                                                + '                    Update Totals'
+                                                + '                </button>'
+                                                + '            </div>'
+                                                + '        </div>'
+                                                + '    </div>'
+                                                + '    <!--  -->'
+                                                + '    <div class="flex-w flex-sb-m p-t-26 p-b-30">'
+                                                + '        <span class="m-text22 w-size19 w-full-sm">'
+                                                + '            Total:'
+                                                + '        </span>'
+                                                + '        <span class="m-text21 w-size20 w-full-sm">'
+                                                + '            $39.00'
+                                                + '        </span>'
+                                                + '    </div>'
+                                                + '    <div class="size15 trans-0-4">'
+                                                + '        <!-- Button -->'
+                                                + '        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">'
+                                                + '            Proceed to Checkout'
+                                                + '        </button>'
+                                                + '    </div>'
+                                                + ' </div>';
+
+            $('#chariotConsommateur').append(htmlResultChariotConsommateur);
+
+        } else {
+            htmlResultChariotConsommateur = '<h2>Oooooopsssss !!!! Chariot Vide / Cart Empty !!!!</h2>';
+            $('#chariotConsommateur').append(htmlResultChariotConsommateur);
+        }
+    return false;
+}
+
+function ChariotConsommateurPetit(resultaChariotConsommateur) {
+
+    var htmlResultChariotConsommateur = '';
+    var valeurSubTotalChariot = 0;
+    var quantiteProduits = 0;
+
+    if (resultaChariotConsommateur.responseJSON.dataResult.length <= 0) {
+        htmlResultChariotConsommateur = '<h2>Chariot Vide / Cart Empty !!!!</h2>';
+        $('#petitChariotConsommateur').text(htmlResultChariotConsommateur);
+        return false;
+    } else {
+        $('#petitChariotConsommateurQte').text(0);
+        $("#petitChariotConsommateur").empty();
+
+        for (var count = 0; count < resultaChariotConsommateur.responseJSON.dataResult.length; count++) {
+
+            htmlResultChariotConsommateur += '<ul class="header-cart-wrapitem">'
+                                            + '   <li class="header-cart-item">'
+                                            + '        <div class="header-cart-item-img">'
+                                            + '            <img src="/Content/images/' + (resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Sku === null ? 'pas_dImage' : resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Sku) + '.jpg" alt="IMG">'
+                                            + '        </div>'
+                                            + '        <div class="header-cart-item-txt">'
+                                            + '            <a href="#" class="header-cart-item-name">'
+                                            + '            ' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.NomProduit
+                                            + '            </a>'
+                                            + '            <span class="header-cart-item-info">'
+                                            + '                ' + resultaChariotConsommateur.responseJSON.dataResult[count].Quantite + ' x $' + currency(resultaChariotConsommateur.responseJSON.dataResult[count].ValeurTotalArticle)
+                                            + '            </span>'
+                                            + '        </div>'
+                                            + '    </li>'
+                                            + '</ul>';
+
+            valeurSubTotalChariot = valeurSubTotalChariot + resultaChariotConsommateur.responseJSON.dataResult[count].ValeurTotalArticle;
+            quantiteProduits = quantiteProduits + resultaChariotConsommateur.responseJSON.dataResult[count].Quantite
+        }
+
+        htmlResultChariotConsommateur += '<div class="header-cart-total">'
+                                            + '   Total: $' + currency(valeurSubTotalChariot)
+                                            + '</div>';
+
+        htmlResultChariotConsommateur += '<div class="header-cart-buttons">'
+                                            + '   <div class="header-cart-wrapbtn">'
+                                            + '       <!-- Button -->'
+                                            + '       <a href="/Chariot" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">'
+                                            + '           View Cart'
+                                            + '       </a>'
+                                            + '   </div>'
+                                            + '   <div class="header-cart-wrapbtn">'
+                                            + '       <!-- Button -->'
+                                            + '       <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">'
+                                            + '           Check Out'
+                                            + '       </a>'
+                                            + '   </div>'
+                                            + '</div>';
+
+        $('#petitChariotConsommateur').append(htmlResultChariotConsommateur);
+        $('#petitChariotConsommateurQte').text(quantiteProduits);
+
+        $(".header-icons-noti").css('background-color', '#e65540');
+        $(".header-icons-noti").css('width', '21px');
+        $(".header-icons-noti").css('height', '21px');
+
+        return false;
+    }
+}
+
+function ChariotConsommateurProduits(idConsommateur) {
+
+    var returnResultat;
+
+    if (idConsommateur === null || idConsommateur === undefined || idConsommateur === '') {
+        return null;
+    }
+
+    return $.ajax({
         url: '/Chariot/ChariotConsommateur',
         type: 'GET',
         data: { "idConsommateur": idConsommateur },
-        dataType: 'json',
-        success: function (data) {
-
-            $("#chariotConsommateur").empty();
-
-            console.log(data.dataResult);
-
-            if (data.dataResult !== null || data.dataResult !== '') {
-
-                htmlResultChariotConsommateur = '<div class="container-table-cart pos-relative">'
-                                                    + '<div class="wrap-table-shopping-cart bgwhite">'
-                                                    + '  <table class="table-shopping-cart">'
-                                                    + '        <tr class="table-head">'
-                                                    + '            <th class="column-1"></th>'
-                                                    + '            <th class="column-2">' + $('#labelProduit').val() + '</th>'
-                                                    + '            <th class="column-3">' + $('#labelPrix').val() + '</th>'
-                                                    + '            <th class="column-4 p-l-70">' + $('#labelQuantite').val() + '</th>'
-                                                    + '            <th class="column-5">Total</th>'
-                                                    + '        </tr>';
-
-                for (var count = 0; count < data.dataResult.length; count++) {
-
-                    htmlResultChariotConsommateur += '<tr class="table-row">'
-                                                     + '   <td class="column-1">'
-                                                     + '       <div class="cart-img-product b-rad-4 o-f-hidden">'
-                                                     + '           <img src="/Content/images/' + (data.dataResult[count].Produit.Sku === null ? 'pas_dImage' : data.dataResult[count].Produit.Sku) + '.jpg" alt="IMG-PRODUCT">'
-                                                     + '       </div>'
-                                                     + '   </td>'
-                                                     + '   <td class="column-2">' + data.dataResult[count].Produit.NomProduit + '</td>'
-                                                     + '   <td class="column-3">$' + data.dataResult[count].ValeurUnitaire + '</td>'
-                                                     + '   <td class="column-4">'
-                                                     + '       <div class="flex-w bo5 of-hidden w-size17">'
-                                                     + '           <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">'
-                                                     + '               <i class="fs-12 fa fa-minus" aria-hidden="true"></i>'
-                                                     + '           </button>'
-                                                     + '           <input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="' + data.dataResult[count].Quantite + '">'
-                                                     + '           <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">'
-                                                     + '               <i class="fs-12 fa fa-plus" aria-hidden="true"></i>'
-                                                     + '           </button>'
-                                                     + '       </div>'
-                                                     + '   </td>'
-                                                     + '   <td class="column-5">$' + data.dataResult[count].ValeurTotalArticle + '</td>'
-                                                     + '</tr>';
-
-                    valeurSubTotalChariot = valeurSubTotalChariot + data.dataResult[count].ValeurTotalArticle;
+        async: false,
+        dataType: 'json'
+    }).done(function (data) {
+                if (data.dataResult === null || data.dataResult === undefined) {
+                    return null;
+                } else {
+                    return data;
                 }
-
-                htmlResultChariotConsommateur += '</table>'
-                                                 + '   </div>'
-                                                 + ' </div>';
-
-                htmlResultChariotConsommateur += '<div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">'
-                                                 + '   <div class="flex-w flex-m w-full-sm">'
-                                                 + '       <div class="size11 bo4 m-r-10">'
-                                                 + '           <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="coupon-code" placeholder="Coupon Code">'
-                                                 + '       </div>'
-                                                 + '       <div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">'
-                                                 + '           <!-- Button -->'
-                                                 + '           <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">'
-                                                 + '               Apply coupon'
-                                                 + '           </button>'
-                                                 + '       </div>'
-                                                 + '   </div>'
-                                                 + '   <div class="size10 trans-0-4 m-t-10 m-b-10">'
-                                                 + '       <!-- Button -->'
-                                                 + '       <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">'
-                                                 + '           Update Cart'
-                                                 + '       </button>'
-                                                 + '   </div>'
-                                                 + ' </div>'
-                                                 + ' <!-- Total -->'
-                                                 + ' <div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">'
-                                                 + '    <h5 class="m-text20 p-b-24">'
-                                                 + '        Cart Totals'
-                                                 + '    </h5>'
-                                                 + '    <div class="flex-w flex-sb-m p-b-12">'
-                                                 + '        <span class="s-text18 w-size19 w-full-sm">'
-                                                 + '            Subtotal:'
-                                                 + '        </span>'
-                                                 + '       <span class="m-text21 w-size20 w-full-sm">'
-                                                 + '            $' + valeurSubTotalChariot 
-                                                 + '        </span>'
-                                                 + '    </div>'
-                                                 + '    <!--  -->'
-                                                 + '    <div class="flex-w flex-sb bo10 p-t-15 p-b-20">'
-                                                 + '        <span class="s-text18 w-size19 w-full-sm">'
-                                                 + '            Shipping:'
-                                                 + '        </span>'
-                                                 + '        <div class="w-size20 w-full-sm">'
-                                                 + '            <p class="s-text8 p-b-23">'
-                                                 + '                There are no shipping methods available. Please double check your address, or contact us if you need any help.'
-                                                 + '           </p>'
-                                                 + '            <span class="s-text19">'
-                                                 + '                Calculate Shipping'
-                                                 + '            </span>'
-                                                 + '            <div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">'
-                                                 + '                <select class="selection-2" name="country">'
-                                                 + '                    <option>Select a country...</option>'
-                                                 + '                    <option>CA</option>'
-                                                 + '                    <option>US</option>'
-                                                 + '               </select>'
-                                                 + '            </div>'
-                                                 + '            <div class="size13 bo4 m-b-12">'
-                                                 + '                <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="state" placeholder="State /  country">'
-                                                 + '            </div>'
-                                                 + '            <div class="size13 bo4 m-b-22">'
-                                                 + '                <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="postcode" placeholder="Postcode / Zip">'
-                                                 + '            </div>'
-                                                 + '            <div class="size14 trans-0-4 m-b-10">'
-                                                 + '                <!-- Button -->'
-                                                 + '                <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">'
-                                                 + '                    Update Totals'
-                                                 + '                </button>'
-                                                 + '            </div>'
-                                                 + '        </div>'
-                                                 + '    </div>'
-                                                 + '    <!--  -->'
-                                                 + '    <div class="flex-w flex-sb-m p-t-26 p-b-30">'
-                                                 + '        <span class="m-text22 w-size19 w-full-sm">'
-                                                 + '            Total:'
-                                                 + '        </span>'
-                                                 + '        <span class="m-text21 w-size20 w-full-sm">'
-                                                 + '            $39.00'
-                                                 + '        </span>'
-                                                 + '    </div>'
-                                                 + '    <div class="size15 trans-0-4">'
-                                                 + '        <!-- Button -->'
-                                                 + '        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">'
-                                                 + '            Proceed to Checkout'
-                                                 + '        </button>'
-                                                 + '    </div>'
-                                                 + ' </div>';
-
-                $('#chariotConsommateur').append(htmlResultChariotConsommateur);
-
-            } else {
-                htmlResultChariotConsommateur = '<h2>Oooooopsssss !!!! Chariot Vide / Cart Empty !!!!</h2>';
-                $('#chariotConsommateur').append(htmlResultChariotConsommateur);
-            }
-        },
-
-        error: function (erro) {
-            try {
-                erro = JSON.parse(erro.responseText);
-                sweetAlert($('#msgError').val(), erro.Message, 'error');
-
-            }
-            catch (err) {
-                err = JSON.parse(err);
-                sweetAlert($('#msgError').val(), erro.Message, 'error');
-            }
-        },
-
-        complete: function () {
-            //Quelque chose ici, si necessaire !!!
-        }
-    });
-    return false;
-
+            });    
 }
