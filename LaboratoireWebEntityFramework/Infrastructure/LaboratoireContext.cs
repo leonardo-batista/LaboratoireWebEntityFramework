@@ -14,6 +14,7 @@ namespace LaboratoireWebEntityFramework.Infrastructure
             
         }
 
+        public DbSet<ClientSession> ClientSessions_ { get; set; }
         public DbSet<Chariot> Chariots_ { get; set; }
         public DbSet<Categorie> Categories_ { get; set; }
         public DbSet<Produit> Produits_ { get; set; }
@@ -26,6 +27,7 @@ namespace LaboratoireWebEntityFramework.Infrastructure
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
+            modelBuilder.Configurations.Add(new ClientSessionMap());
             modelBuilder.Configurations.Add(new ChariotMap());
             modelBuilder.Configurations.Add(new CategorieMap());
             modelBuilder.Configurations.Add(new ProduitMap());

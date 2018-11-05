@@ -21,7 +21,7 @@ namespace LaboratoireWebEntityFramework.DAO
             try
             {
                 
-                //Todo! Alors, les deux options ci-dessous ça marche très bien ;) 
+                //TODO! Alors, les deux options ci-dessous ça marche très bien ;) 
 
                 //1er Option de Requete
                 return context.Chariots_.Include("Produit").OrderBy(cha => cha.DateCreation).Where(cha => cha.IdConsommateur == new Guid(idConsommateur)).ToList();
