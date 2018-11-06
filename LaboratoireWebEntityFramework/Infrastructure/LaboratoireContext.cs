@@ -11,7 +11,8 @@ namespace LaboratoireWebEntityFramework.Infrastructure
     {
         public LaboratoireContext() : base("name=BD_LABORATOIRE")
         {
-            
+            //FR = DÉSACTIVER LA CREÁTION AUTOMATIQUE DE LA BASE DE DONNÉE - US = DISABLE DATABASE INITIALIZER
+            Database.SetInitializer<LaboratoireContext>(null);
         }
 
         public DbSet<ClientSession> ClientSessions_ { get; set; }
@@ -21,8 +22,6 @@ namespace LaboratoireWebEntityFramework.Infrastructure
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //modelBuilder.HasDefaultSchema("LABORATOIRE");
-
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
@@ -32,6 +31,5 @@ namespace LaboratoireWebEntityFramework.Infrastructure
             modelBuilder.Configurations.Add(new CategorieMap());
             modelBuilder.Configurations.Add(new ProduitMap());
         }
-
     }
 }

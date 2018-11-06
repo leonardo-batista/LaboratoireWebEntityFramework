@@ -1,6 +1,8 @@
 $(document).ready(function () {
     $.ajaxSetup({ cache: false });
 
+    //ON CLICK
+
     //CHARGER TITRE PAR PAGE
     TitrePageWeb();
 
@@ -179,6 +181,10 @@ function ListeDesCategoriePageProduct()
 }
 
 function ProductDetail(idProduct) {
+
+    alert('Felicitation, Detail du Produit !!! ' + idProduct);
+
+    return false;
 
     $.ajax({
         url: '/Product/ProductDetail',
@@ -385,6 +391,30 @@ function ChariotConsomateurPage() {
 
     ChariotConsommateur(resultaChariotConsommateur);
 
+    $('.btn-num-product-down').on('click', function (e) {
+        e.preventDefault();
+        //console.log($(this));
+
+        //console.log("A Link with Class : " + $(this).attr("class") + ", And ID Of : " + $(this).attr("name") + " Was. Clicked!");
+
+        //console.log(e.target);
+
+            console.log($(this).find('input').show());
+
+
+
+        var numProduct = Number($(this).next().val());
+        if (numProduct > 1) $(this).next().val(numProduct - 1);
+
+        
+
+    });
+
+    $('.btn-num-product-up').on('click', function (e) {
+        e.preventDefault();
+        var numProduct = Number($(this).prev().val());
+        $(this).prev().val(numProduct + 1);
+    });
 }
 
 function ChariotConsommateur(resultaChariotConsommateur) {
@@ -415,7 +445,7 @@ function ChariotConsommateur(resultaChariotConsommateur) {
 
                 htmlResultChariotConsommateur += '<tr class="table-row">'
                                                     + '   <td class="column-1">'
-                                                    + '       <div class="cart-img-product b-rad-4 o-f-hidden">'
+                                                    + '       <div class="cart-img-product b-rad-4 o-f-hidden" title="Cliquez sur l&#39;image pour supprimer !!!" onclick="SupprimerProduitChariot(' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit + ');">'
                                                     + '           <img src="/Content/images/' + (resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Sku === null ? 'pas_dImage' : resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Sku) + '.jpg" alt="IMG-PRODUCT">'
                                                     + '       </div>'
                                                     + '   </td>'
@@ -423,11 +453,11 @@ function ChariotConsommateur(resultaChariotConsommateur) {
                                                     + '   <td class="column-3">$' + currency(resultaChariotConsommateur.responseJSON.dataResult[count].ValeurUnitaire) + '</td>'
                                                     + '   <td class="column-4">'
                                                     + '       <div class="flex-w bo5 of-hidden w-size17">'
-                                                    + '           <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">'
+                                                    + '           <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2" name="buttonDownProduct' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit + '">'
                                                     + '               <i class="fs-12 fa fa-minus" aria-hidden="true"></i>'
                                                     + '           </button>'
-                                                    + '           <input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="' + resultaChariotConsommateur.responseJSON.dataResult[count].Quantite + '">'
-                                                    + '           <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">'
+                                                    + '           <input class="size8 m-text18 t-center num-product" type="number" name="num-product' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit +'" value="' + resultaChariotConsommateur.responseJSON.dataResult[count].Quantite + '">'
+                                                    + '           <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2" name="buttonUpProduct' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit + '">'
                                                     + '               <i class="fs-12 fa fa-plus" aria-hidden="true"></i>'
                                                     + '           </button>'
                                                     + '       </div>'
@@ -551,7 +581,7 @@ function ChariotConsommateurPetit(resultaChariotConsommateur) {
 
             htmlResultChariotConsommateur += '<ul class="header-cart-wrapitem">'
                                             + '   <li class="header-cart-item">'
-                                            + '        <div class="header-cart-item-img">'
+                                            + '        <div class="header-cart-item-img title="Cliquez sur l&#39;image pour supprimer !!!" onclick="ProductDetail(' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit + ');"">'
                                             + '            <img src="/Content/images/' + (resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Sku === null ? 'pas_dImage' : resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Sku) + '.jpg" alt="IMG">'
                                             + '        </div>'
                                             + '        <div class="header-cart-item-txt">'
@@ -620,4 +650,8 @@ function ChariotConsommateurProduits(idConsommateur) {
                     return data;
                 }
             });    
+}
+
+function SupprimerProduitChariot(idProduit) {
+    alert('Parfait, félicitation !!! ' + idProduit);
 }

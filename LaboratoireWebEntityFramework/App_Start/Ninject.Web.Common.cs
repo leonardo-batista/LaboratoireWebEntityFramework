@@ -9,8 +9,8 @@ namespace LaboratoireWebEntityFramework.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Ninject.Web.Common.WebHost;
-    using Repository;
     using Infrastructure;
+    using log4net;
 
     public static class NinjectWebCommon 
     {
@@ -66,6 +66,10 @@ namespace LaboratoireWebEntityFramework.App_Start
                 .ToSelf()
                 .InRequestScope()
                 .Named("LaboratoireContext");
+
+            log4net.Config.XmlConfigurator.Configure();
+            var loggerPourWebSite = LogManager.GetLogger("LoggerEcommerce");
+            kernel.Bind<ILog>().ToConstant(loggerPourWebSite).Named("LoggerPourWebSite");
 
             //kernel.Get<LaboratoireContext>("LaboratoireContext");
 
