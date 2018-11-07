@@ -151,6 +151,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informatique.
+        /// </summary>
+        internal static string Informatique {
+            get {
+                return ResourceManager.GetString("Informatique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Intervalle.
         /// </summary>
         internal static string Intervalle {
@@ -205,6 +214,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nouveaux produits.
+        /// </summary>
+        internal static string NouveauxProduits {
+            get {
+                return ResourceManager.GetString("NouveauxProduits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prix.
         /// </summary>
         internal static string Prix {
@@ -219,6 +237,15 @@ namespace Resources {
         internal static string Produit {
             get {
                 return ResourceManager.GetString("Produit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allez-y et ajoutez quelque chose !!!.
+        /// </summary>
+        internal static string ProfitezVous {
+            get {
+                return ResourceManager.GetString("ProfitezVous", resourceCulture);
             }
         }
         

@@ -57,6 +57,10 @@
                         </li>
 
                         <li>
+                            @Html.ActionLink(Resources.Translation.Chariot, "Index", "Chariot", null, new { id = "Chariot", title = @Resources.Translation.Chariot })
+                        </li>
+
+                        <li>
                             @Html.ActionLink(@Resources.Translation.Apropos, "Index", "About", null, new { id = "About", title = @Resources.Translation.Apropos })
                         </li>
 
@@ -82,7 +86,7 @@
                     <!-- Header cart noti -->
                     <div class="header-cart header-dropdown" id="petitChariotConsommateur">
                         <ul>
-                            <li>Opssss Chariot Vide / Cart Empty !!!!</li>
+                            <li><a href="/Product" id="Product">@Resources.Translation.ProfitezVous</a></li>
                         </ul>
                     </div>
                 </div>

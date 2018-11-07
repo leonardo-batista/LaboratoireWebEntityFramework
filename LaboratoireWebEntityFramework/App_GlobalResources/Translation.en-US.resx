@@ -180,4 +180,13 @@
   <data name="Quantite" xml:space="preserve">
     <value>Quantity</value>
   </data>
+  <data name="ProfitezVous" xml:space="preserve">
+    <value>Go ahead and add something !!!</value>
+  </data>
+  <data name="Informatique" xml:space="preserve">
+    <value>Informatic</value>
+  </data>
+  <data name="NouveauxProduits" xml:space="preserve">
+    <value>New products</value>
+  </data>
 </root>

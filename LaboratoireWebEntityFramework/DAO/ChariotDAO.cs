@@ -55,5 +55,141 @@ namespace LaboratoireWebEntityFramework.DAO
                 throw ex;
             }
         }
+
+        public bool ChariotAjouterProduit(string idConsommateur, Int32 idProduit)
+        {
+            try
+            {
+                var resultat = (from p in context.Chariots_
+                                where p.IdConsommateur == new Guid(idConsommateur) && p.Id_Produit == idProduit
+                                select p).SingleOrDefault();
+
+                if (resultat != null)
+                {
+                    resultat.Quantite += 1;
+                    resultat.ValeurUnitaire = resultat.Produit.Valeur;
+                    resultat.ValeurTotalArticle = resultat.Produit.Valeur * resultat.Quantite;
+
+                    context.SaveChanges();
+
+                    return true;
+                }
+                else
+                {
+                    var restultatProduit = (from p in context.Produits_
+                                            where p.Id_Produit == idProduit
+                                            select p).SingleOrDefault();
+
+                    if (restultatProduit != null)
+                    {
+                        Chariot chariot = new Chariot();
+                        chariot.IdConsommateur = new Guid(idConsommateur);
+                        chariot.Id_Produit = restultatProduit.Id_Produit;
+                        chariot.ValeurUnitaire = restultatProduit.Valeur;
+                        chariot.ValeurTotalArticle = restultatProduit.Valeur * 1;
+                        chariot.Quantite = 1;
+                        chariot.Actif = true;
+
+                        context.Chariots_.Add(chariot);
+                        context.SaveChanges();
+
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }                
+            }
+            catch (IOException iOEx)
+            {
+                logger.Error("IOException ", iOEx);
+                throw iOEx;
+            }
+            catch (SqlException sqlEx)
+            {
+                logger.Error("SqlException Base de Donnée", sqlEx);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Exception Générique", ex);
+                throw ex;
+            }
+        }
+
+        public bool ChariotMiseAjourQuantite(string idConsommateur, Int32 idProduit, int quantite)
+        {
+            try
+            {
+                var resultat = (from p in context.Chariots_
+                                where p.IdConsommateur == new Guid(idConsommateur) && p.Id_Produit == idProduit
+                                select p).SingleOrDefault();
+
+                if (resultat != null)
+                {
+                    resultat.Quantite = quantite;
+                    context.SaveChanges();
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }               
+            }
+            catch (IOException iOEx)
+            {
+                logger.Error("IOException ", iOEx);
+                throw iOEx;
+            }
+            catch (SqlException sqlEx)
+            {
+                logger.Error("SqlException Base de Donnée", sqlEx);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Exception Générique", ex);
+                throw ex;
+            }
+        }
+
+        public bool ChariotSupprimerProduit(string idConsommateur, Int32 idProduit)
+        {
+            try
+            {
+                var resultat = (from p in context.Chariots_
+                                where p.IdConsommateur == new Guid(idConsommateur) && p.Id_Produit == idProduit
+                                select p).SingleOrDefault();
+
+                if (resultat != null)
+                {
+                    context.Chariots_.Remove(resultat);
+                    context.SaveChanges();
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (IOException iOEx)
+            {
+                logger.Error("IOException ", iOEx);
+                throw iOEx;
+            }
+            catch (SqlException sqlEx)
+            {
+                logger.Error("SqlException Base de Donnée", sqlEx);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Exception Générique", ex);
+                throw ex;
+            }
+        }
     }
 }

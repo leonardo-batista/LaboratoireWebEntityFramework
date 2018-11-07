@@ -158,6 +158,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\cssPersonalise.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\main.min.css" />
     <Content Include="Content\css\resetCss.css" />
@@ -2608,6 +2609,9 @@
     <Content Include="Content\images\banner-12.jpg" />
     <Content Include="Content\images\banner-13.jpg" />
     <Content Include="Content\images\banner-14.jpg" />
+    <Content Include="Content\images\banner1_1920_570.jpg" />
+    <Content Include="Content\images\banner2_1920_570.jpg" />
+    <Content Include="Content\images\banner3_1920_570.jpg" />
     <Content Include="Content\images\bg-banner-01.jpg" />
     <Content Include="Content\images\bg-banner-02.jpg" />
     <Content Include="Content\images\bg-video-01.jpg" />

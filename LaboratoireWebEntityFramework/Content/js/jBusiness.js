@@ -131,6 +131,8 @@ function ListeDesCategoriePageProduct()
 
     var htmlResultCategories = '';
 
+    Loading();
+
     $.ajax({
         url: '/Product/ListeCategorieProduit',
         type: 'GET',
@@ -171,10 +173,13 @@ function ListeDesCategoriePageProduct()
                 err = JSON.parse(err);
                 sweetAlert($('#msgError').val(), erro.Message, 'error');
             }
+
+            Loaded();
         },
 
         complete: function () {
             //Quelque chose ici, si necessaire !!!
+            Loaded();
         }
     });
     return false;
@@ -185,6 +190,8 @@ function ProductDetail(idProduct) {
     alert('Felicitation, Detail du Produit !!! ' + idProduct);
 
     return false;
+
+    Loading();
 
     $.ajax({
         url: '/Product/ProductDetail',
@@ -206,10 +213,13 @@ function ProductDetail(idProduct) {
                 err = JSON.parse(err);
                 sweetAlert($('#msgError').val(), erro.Message, 'error');
             }
+
+            Loaded();
         },
 
         complete: function () {
             //Quelque chose ici, si necessaire !!!
+            Loaded();
         }
     });
     return false;
@@ -226,8 +236,9 @@ function ProductsByCategory(idCategorie) {
         return false;
     }
 
-
     var htmlResultAllProducts = '';
+
+    Loading();
 
     $.ajax({
         url: '/Product/ListeDeProduitsParCategorie',
@@ -251,7 +262,7 @@ function ProductsByCategory(idCategorie) {
                         + '                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>'
                         + '            </a>'
                         + '            <div class="block2-btn-addcart w-size1 trans-0-4">'
-                        + '               <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">'
+                        + '               <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" onclick="AjouterProduitChariot(' + data.dataResult[count].Id_Produit + ')">'
                         + '                 ' + $('#texteButtonChariot').val()
                         + '                </button>'
                         + '            </div>'
@@ -286,11 +297,14 @@ function ProductsByCategory(idCategorie) {
                 erro = JSON.parse(erro);
                 sweetAlert($('#msgError').val(), erro.Message, 'error');
             }
+
+            Loaded();
         },
 
         complete: function () {
             //Quelque chose ici, si necessaire !!!
             $.removeCookie("CategorieIdTemporaire");
+            Loaded();
         }
     });
     return false;
@@ -313,6 +327,8 @@ function ProductsByCategoryAll() {
 
     var htmlResultAllProducts = '';
 
+    Loading();
+
     $.ajax({
         url: '/Product/ListeDeProduitsParCategorieTous',
         type: 'GET',
@@ -333,7 +349,7 @@ function ProductsByCategoryAll() {
                         + '                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>'
                         + '            </a>'
                         + '            <div class="block2-btn-addcart w-size1 trans-0-4">'
-                        + '               <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">'
+                        + '               <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" onclick="AjouterProduitChariot(' + data.dataResult[count].Id_Produit + ')">'
                         + '                 ' + $('#texteButtonChariot').val()
                         + '                </button>'
                         + '            </div>'
@@ -368,11 +384,14 @@ function ProductsByCategoryAll() {
                 err = JSON.parse(err);
                 sweetAlert($('#msgError').val(), erro.Message, 'error');
             }
+
+            Loaded();
         },
 
         complete: function () {
             //Quelque chose ici, si necessaire !!!
             $.removeCookie("CategorieIdTemporaire");
+            Loaded();
         }
     });
     return false;
@@ -385,35 +404,37 @@ function ChariotConsomateurPage() {
         return false;
     }
 
-    var resultaChariotConsommateur = ChariotConsommateurProduits('84BE5F20-8D85-4B02-B86E-0D301E033EEF');
-
-    ChariotConsommateurPetit(resultaChariotConsommateur);
+    var resultaChariotConsommateur = ChariotConsommateurProduits($.cookie('idConsommateurSession'));
 
     ChariotConsommateur(resultaChariotConsommateur);
 
+    ChariotConsommateurPetit(resultaChariotConsommateur);
+
     $('.btn-num-product-down').on('click', function (e) {
+        var numeroAttrName = 0;
         e.preventDefault();
-        //console.log($(this));
 
-        //console.log("A Link with Class : " + $(this).attr("class") + ", And ID Of : " + $(this).attr("name") + " Was. Clicked!");
-
-        //console.log(e.target);
-
-            console.log($(this).find('input').show());
-
-
+        numeroAttrName = $(this).attr("name").replace(/\D/g, '');
 
         var numProduct = Number($(this).next().val());
-        if (numProduct > 1) $(this).next().val(numProduct - 1);
+        if (numProduct > 1) {
+            $(this).next().val(numProduct - 1);
+            $("#numProductId" + String(numeroAttrName)).attr('value', numProduct - 1);
 
-        
-
+            MiseAjourProduitChariotQuantite(Number(numeroAttrName), numProduct - 1);
+        }        
     });
 
     $('.btn-num-product-up').on('click', function (e) {
+        var numeroAttrName = 0;
         e.preventDefault();
+
+        numeroAttrName = $(this).attr("name").replace(/\D/g, '');
+
         var numProduct = Number($(this).prev().val());
         $(this).prev().val(numProduct + 1);
+        $("#numProductId" + String(numeroAttrName)).attr('value', numProduct + 1);
+        MiseAjourProduitChariotQuantite(Number(numeroAttrName), numProduct + 1);
     });
 }
 
@@ -426,9 +447,11 @@ function ChariotConsommateur(resultaChariotConsommateur) {
     var htmlResultChariotConsommateur = '';
     var valeurSubTotalChariot = 0;
 
-        $("#chariotConsommateur").empty();
+    $("#chariotConsommateur").empty();
 
-        if (resultaChariotConsommateur.responseJSON.dataResult !== null || resultaChariotConsommateur.responseJSON.dataResult !== '') {
+    if (resultaChariotConsommateur.responseJSON.dataResult.length > 0) {
+
+        //if (resultaChariotConsommateur.responseJSON.dataResult !== null || resultaChariotConsommateur.responseJSON.dataResult !== '' || resultaChariotConsommateur.responseJSON.dataResult.length > 0) {
 
             htmlResultChariotConsommateur = '<div class="container-table-cart pos-relative">'
                                                 + '<div class="wrap-table-shopping-cart bgwhite">'
@@ -453,10 +476,10 @@ function ChariotConsommateur(resultaChariotConsommateur) {
                                                     + '   <td class="column-3">$' + currency(resultaChariotConsommateur.responseJSON.dataResult[count].ValeurUnitaire) + '</td>'
                                                     + '   <td class="column-4">'
                                                     + '       <div class="flex-w bo5 of-hidden w-size17">'
-                                                    + '           <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2" name="buttonDownProduct' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit + '">'
+                                                    + '           <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2" name="buttonDownProduct' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit +'">'
                                                     + '               <i class="fs-12 fa fa-minus" aria-hidden="true"></i>'
                                                     + '           </button>'
-                                                    + '           <input class="size8 m-text18 t-center num-product" type="number" name="num-product' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit +'" value="' + resultaChariotConsommateur.responseJSON.dataResult[count].Quantite + '">'
+                                                    + '           <input class="size8 m-text18 t-center num-product" type="number" id="numProductId' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit + '" name="numProductId' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit + '" value="' + resultaChariotConsommateur.responseJSON.dataResult[count].Quantite + '">'
                                                     + '           <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2" name="buttonUpProduct' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit + '">'
                                                     + '               <i class="fs-12 fa fa-plus" aria-hidden="true"></i>'
                                                     + '           </button>'
@@ -472,7 +495,7 @@ function ChariotConsommateur(resultaChariotConsommateur) {
                                                 + '   </div>'
                                                 + ' </div>';
 
-            htmlResultChariotConsommateur += '<div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">'
+            htmlResultChariotConsommateur += '<div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm" id="chariotLivrasion">'
                                                 + '   <div class="flex-w flex-m w-full-sm">'
                                                 + '       <div class="size11 bo4 m-r-10">'
                                                 + '           <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="coupon-code" placeholder="Coupon Code">'
@@ -556,8 +579,9 @@ function ChariotConsommateur(resultaChariotConsommateur) {
 
             $('#chariotConsommateur').append(htmlResultChariotConsommateur);
 
-        } else {
-            htmlResultChariotConsommateur = '<h2>Oooooopsssss !!!! Chariot Vide / Cart Empty !!!!</h2>';
+    } else {
+            $("#chariotConsommateur").empty();
+            htmlResultChariotConsommateur = '<div align="center"><a href="/Product" id="Product"><h4>' + $('#labelProfitezVous').val() + '</h4></a></div>';
             $('#chariotConsommateur').append(htmlResultChariotConsommateur);
         }
     return false;
@@ -570,8 +594,14 @@ function ChariotConsommateurPetit(resultaChariotConsommateur) {
     var quantiteProduits = 0;
 
     if (resultaChariotConsommateur.responseJSON.dataResult.length <= 0) {
-        htmlResultChariotConsommateur = '<h2>Chariot Vide / Cart Empty !!!!</h2>';
-        $('#petitChariotConsommateur').text(htmlResultChariotConsommateur);
+        $("#petitChariotConsommateur").empty();
+        $('#petitChariotConsommateurQte').text(0);
+        $(".header-icons-noti").css('background-color', '#111111');
+        $(".header-icons-noti").css('width', '16px');
+        $(".header-icons-noti").css('height', '16px');
+
+        htmlResultChariotConsommateur = '<a href="/Product" id="Product"><h6>' + $('#labelProfitezVous').val() + '</h6></a>';
+        $('#petitChariotConsommateur').append(htmlResultChariotConsommateur);
         return false;
     } else {
         $('#petitChariotConsommateurQte').text(0);
@@ -637,6 +667,8 @@ function ChariotConsommateurProduits(idConsommateur) {
         return null;
     }
 
+    Loading();
+
     return $.ajax({
         url: '/Chariot/ChariotConsommateur',
         type: 'GET',
@@ -644,14 +676,153 @@ function ChariotConsommateurProduits(idConsommateur) {
         async: false,
         dataType: 'json'
     }).done(function (data) {
-                if (data.dataResult === null || data.dataResult === undefined) {
+        if (data.dataResult === null || data.dataResult === undefined) {
+                    Loaded();
                     return null;
                 } else {
+                    Loaded();
                     return data;
-                }
+                }                
             });    
 }
 
+function AjouterProduitChariot(idProduit) {
+
+    if ($.cookie('idConsommateurSession') === null || $.cookie('idConsommateurSession') === undefined || $.cookie('idConsommateurSession') === '') {
+        return false;
+    }
+
+    Loading();
+
+    $.ajax({
+        url: '/Chariot/ChariotConsommateurAjouterProduit',
+        type: 'POST',
+        data: { "idConsommateur": $.cookie('idConsommateurSession'), "idProduit": idProduit },
+        dataType: 'json',
+        success: function (data) {
+
+            if (data.dataResult === true) {
+                //ChariotConsomateurPage();
+            }
+        },
+
+        error: function (erro) {
+            try {
+                erro = JSON.parse(erro.responseText);
+                sweetAlert($('#msgError').val(), erro.Message, 'error');
+
+            }
+            catch (err) {
+                err = JSON.parse(err);
+                sweetAlert($('#msgError').val(), erro.Message, 'error');
+            }
+
+            Loaded();
+        },
+
+        complete: function () {
+            //Quelque chose ici, si necessaire !!!
+            Loaded();
+        }
+    });
+    return false;
+
+}
+
+function MiseAjourProduitChariotQuantite(idProduit, quantite) {
+
+    if ($("#indexChariot").length === 0) {
+        return false;
+    }
+
+    if ($.cookie('idConsommateurSession') === null || $.cookie('idConsommateurSession') === undefined || $.cookie('idConsommateurSession') === '') {
+        return false;
+    }
+
+    Loading();
+
+    $.ajax({
+        url: '/Chariot/ChariotConsommateurMiseAJourQuantite',
+        type: 'POST',
+        data: { "idConsommateur": $.cookie('idConsommateurSession'), "idProduit": idProduit, "quantite": quantite },
+        dataType: 'json',
+        success: function (data) {
+
+            if (data.dataResult === true) {
+                ChariotConsomateurPage();
+            }
+        },
+
+        error: function (erro) {
+            try {
+                erro = JSON.parse(erro.responseText);
+                sweetAlert($('#msgError').val(), erro.Message, 'error');
+
+            }
+            catch (err) {
+                err = JSON.parse(err);
+                sweetAlert($('#msgError').val(), erro.Message, 'error');
+            }
+
+            Loaded();
+        },
+
+        complete: function () {
+            //Quelque chose ici, si necessaire !!!
+            Loaded();
+        }
+    });
+    return false;
+
+}
+
 function SupprimerProduitChariot(idProduit) {
-    alert('Parfait, félicitation !!! ' + idProduit);
+
+    if ($.cookie('idConsommateurSession') === null || $.cookie('idConsommateurSession') === undefined || $.cookie('idConsommateurSession') === '') {
+        return false;
+    }
+
+    Loading();
+
+    $.ajax({
+        url: '/Chariot/ChariotConsommateurSupprimerProduit',
+        type: 'DELETE',
+        data: { "idConsommateur": $.cookie('idConsommateurSession'), "idProduit": idProduit },
+        dataType: 'json',
+        success: function (data) {
+
+            if (data.dataResult === true) {
+                ChariotConsomateurPage();
+            }
+        },
+
+        error: function (erro) {
+            try {
+                erro = JSON.parse(erro.responseText);
+                sweetAlert($('#msgError').val(), erro.Message, 'error');
+
+            }
+            catch (err) {
+                err = JSON.parse(err);
+                sweetAlert($('#msgError').val(), erro.Message, 'error');
+            }
+
+            Loaded();
+        },
+
+        complete: function () {
+            //Quelque chose ici, si necessaire !!!
+            Loaded();
+        }
+    });
+    return false;
+}
+
+/* LOADING */
+function Loading() {
+    $('body').append('<div id="loading"><div></div></div>');
+}
+
+function Loaded() {
+    $('#loading').remove();
 }
