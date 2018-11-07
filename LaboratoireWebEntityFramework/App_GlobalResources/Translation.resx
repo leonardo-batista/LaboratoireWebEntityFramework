@@ -171,4 +171,22 @@
   <data name="Tous" xml:space="preserve">
     <value>Tous</value>
   </data>
+  <data name="Chariot" xml:space="preserve">
+    <value>Chariot</value>
+  </data>
+  <data name="Produit" xml:space="preserve">
+    <value>Produit</value>
+  </data>
+  <data name="Quantite" xml:space="preserve">
+    <value>Quantite</value>
+  </data>
+  <data name="ProfitezVous" xml:space="preserve">
+    <value>Allez-y et ajoutez quelque chose !!!</value>
+  </data>
+  <data name="Informatique" xml:space="preserve">
+    <value>Informatique</value>
+  </data>
+  <data name="NouveauxProduits" xml:space="preserve">
+    <value>Nouveaux produits</value>
+  </data>
 </root>

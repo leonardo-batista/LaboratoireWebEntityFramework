@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <head>
-    <title>Product</title>
+    <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -33,7 +33,10 @@
     <link rel="stylesheet" type="text/css" href="~/Content/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/Content/css/main.css">
     <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/cssPersonalise.css">
+    <!--===============================================================================================-->
 </head>
+<html>
 <body class="animsition">
     @Html.Partial("_Header")
 
@@ -96,35 +99,14 @@
 			});
 		});
     </script>
-
-    <!--===============================================================================================-->
-    <script type="text/javascript" src="~/Content/vendor/noui/nouislider.min.js"></script>
-    <script type="text/javascript">
-		/*[ No ui ]
-	    ===========================================================*/
-	    var filterBar = document.getElementById('filter-bar');
-
-	    noUiSlider.create(filterBar, {
-	        start: [ 50, 200 ],
-	        connect: true,
-	        range: {
-	            'min': 50,
-	            'max': 200
-	        }
-	    });
-
-	    var skipValues = [
-	    document.getElementById('value-lower'),
-	    document.getElementById('value-upper')
-	    ];
-
-	    filterBar.noUiSlider.on('update', function( values, handle ) {
-	        skipValues[handle].innerHTML = Math.round(values[handle]) ;
-	    });
-    </script>
-    <!--===============================================================================================-->
-    <script src="~/Content/js/main.js"></script>
     <!--===============================================================================================-->
     <script src="~/Content/js/jBusiness.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="~/Content/js/main.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="~/Content/vendor/noui/nouislider.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="~/Content/js/currency.min.js"></script>
+
 </body>
 </html>

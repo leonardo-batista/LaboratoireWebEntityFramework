@@ -12,10 +12,11 @@ namespace LaboratoireWebEntityFramework.Controllers
     [CacheResponse]
     [HandleExceptionAttribute]
     [EnableCompression]
+    [ConsommateurSessionFilterAttribute]
     public class HomeController : Controller
     {
         [HttpGet]
-        [OutputCache(Duration = 3600, VaryByParam = "none", Location = OutputCacheLocation.Server)]
+        //[OutputCache(Duration = 3600, VaryByParam = "none", Location = OutputCacheLocation.Server)]
         public ActionResult Index()
         {
             return View();

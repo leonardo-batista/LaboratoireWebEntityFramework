@@ -166,8 +166,8 @@
         if(numProduct > 1) $(this).next().val(numProduct - 1);
     });
 
-    $('.btn-num-product-up').on('click', function(e){
-        e.preventDefault();
+    $('.btn-num-product-up').on('click', function (e) {
+        e.preventDefault();        
         var numProduct = Number($(this).prev().val());
         $(this).prev().val(numProduct + 1);
     });
