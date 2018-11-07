@@ -60,6 +60,7 @@ namespace LaboratoireWebEntityFramework.DAO
         {
             try
             {
+                logger.Info("Requête, Liste des Produits du Consommateur");
                 var resultat = (from p in context.Chariots_
                                 where p.IdConsommateur == new Guid(idConsommateur) && p.Id_Produit == idProduit
                                 select p).SingleOrDefault();
@@ -70,12 +71,14 @@ namespace LaboratoireWebEntityFramework.DAO
                     resultat.ValeurUnitaire = resultat.Produit.Valeur;
                     resultat.ValeurTotalArticle = resultat.Produit.Valeur * resultat.Quantite;
 
+                    logger.Info("SaveChagens(), Consommateur a changé la quantité des produits");
                     context.SaveChanges();
 
                     return true;
                 }
                 else
                 {
+                    logger.Info("Requetê, Verifiér si il y a de Produit avant de Ajouter au Chariot/Panner, SessionConsommateur: " + idConsommateur);
                     var restultatProduit = (from p in context.Produits_
                                             where p.Id_Produit == idProduit
                                             select p).SingleOrDefault();
@@ -92,11 +95,13 @@ namespace LaboratoireWebEntityFramework.DAO
 
                         context.Chariots_.Add(chariot);
                         context.SaveChanges();
+                        logger.Info("SaveChagens(), Consommateur a ajouté le Produit, Session: " + idConsommateur);
 
                         return true;
                     }
                     else
                     {
+                        logger.Info("Ooopps, Pas de Produit pour le Consommateur ajouter, Session: " + idConsommateur);
                         return false;
                     }
                 }                
@@ -108,7 +113,7 @@ namespace LaboratoireWebEntityFramework.DAO
             }
             catch (SqlException sqlEx)
             {
-                logger.Error("SqlException Base de Donnée", sqlEx);
+                logger.Fatal("SqlException Base de Donnée", sqlEx);
                 throw sqlEx;
             }
             catch (Exception ex)
@@ -122,6 +127,7 @@ namespace LaboratoireWebEntityFramework.DAO
         {
             try
             {
+                logger.Info("Requête, Liste des Produits du Consommateur");
                 var resultat = (from p in context.Chariots_
                                 where p.IdConsommateur == new Guid(idConsommateur) && p.Id_Produit == idProduit
                                 select p).SingleOrDefault();
@@ -130,11 +136,13 @@ namespace LaboratoireWebEntityFramework.DAO
                 {
                     resultat.Quantite = quantite;
                     context.SaveChanges();
+                    logger.Info("SaveChagens(), Consommateur faire la mise à jour, Session: " + idConsommateur);
 
                     return true;
                 }
                 else
                 {
+                    logger.Info("Ooopps, Pas de Produit pour le Consommateur faire la mise à jour, Session: " + idConsommateur);
                     return false;
                 }               
             }
@@ -145,7 +153,7 @@ namespace LaboratoireWebEntityFramework.DAO
             }
             catch (SqlException sqlEx)
             {
-                logger.Error("SqlException Base de Donnée", sqlEx);
+                logger.Fatal("SqlException Base de Donnée", sqlEx);
                 throw sqlEx;
             }
             catch (Exception ex)
@@ -159,6 +167,7 @@ namespace LaboratoireWebEntityFramework.DAO
         {
             try
             {
+                logger.Info("Requête, Liste des Produits du Consommateur, Session: " + idConsommateur);
                 var resultat = (from p in context.Chariots_
                                 where p.IdConsommateur == new Guid(idConsommateur) && p.Id_Produit == idProduit
                                 select p).SingleOrDefault();
@@ -167,6 +176,7 @@ namespace LaboratoireWebEntityFramework.DAO
                 {
                     context.Chariots_.Remove(resultat);
                     context.SaveChanges();
+                    logger.Info("Supprimer, Le Consommateur a supprimé le produit, Session: " + idConsommateur);
 
                     return true;
                 }
@@ -182,7 +192,7 @@ namespace LaboratoireWebEntityFramework.DAO
             }
             catch (SqlException sqlEx)
             {
-                logger.Error("SqlException Base de Donnée", sqlEx);
+                logger.Fatal("SqlException Base de Donnée", sqlEx);
                 throw sqlEx;
             }
             catch (Exception ex)
