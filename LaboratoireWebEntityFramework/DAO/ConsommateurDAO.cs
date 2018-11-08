@@ -26,7 +26,7 @@ namespace LaboratoireWebEntityFramework.DAO
             {
                 logger.Info("Debut - Creátion de Session du Consommateur....");
                 ClientSession clientSession = new ClientSession();
-                context.ClientSessions_.Add(clientSession);
+                context.ClientSessions.Add(clientSession);
                 context.SaveChanges();
                 logger.Info("Fin - Creátion de Session du Consommateur: " + clientSession.Id_Consommateur.ToString());
                 return clientSession.Id_Consommateur.ToString();

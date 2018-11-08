@@ -25,7 +25,7 @@ namespace LaboratoireWebEntityFramework.DAO
             try
             {
                 logger.Info("Requête, Liste de Categories");
-                return context.Categories_.OrderBy(c => c.NomCaregorie).Where(c => c.Actif == true).ToList();
+                return context.Categories.OrderBy(c => c.NomCaregorie).Where(c => c.Actif == true).ToList();
             }
             catch (IOException iOEx)
             {

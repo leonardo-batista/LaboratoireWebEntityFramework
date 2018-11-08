@@ -18,10 +18,11 @@ namespace LaboratoireWebEntityFramework.Filters
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             object idConsommateurSession = filterContext.RequestContext.HttpContext.Request.Cookies["idConsommateurSession"];
-            ValidationSessionConsommateur(filterContext, idConsommateurSession);
+            object chariotConsommateurProduit = filterContext.RequestContext.HttpContext.Request.Cookies["chariotConsommateurProduit"];
+            ValidationSessionConsommateur(filterContext, idConsommateurSession, chariotConsommateurProduit);
         }
 
-        private void ValidationSessionConsommateur(ActionExecutingContext filterContext, object idConsommateurSession)
+        private void ValidationSessionConsommateur(ActionExecutingContext filterContext, object idConsommateurSession, object chariotConsommateurProduit)
         {
             //TODO! Cas de Cookie expired....
             if (idConsommateurSession == null)
@@ -33,8 +34,12 @@ namespace LaboratoireWebEntityFramework.Filters
                 HttpCookie cookie = new HttpCookie("idConsommateurSession");
                 cookie.Value = resultatConsommateurSession;
                 cookie.Expires = DateTime.Now.AddHours(24);
-                //cookie.Expires = DateTime.Now.AddSeconds(15);
                 filterContext.HttpContext.Response.AppendCookie(cookie);
+
+                HttpCookie cookieChariot = new HttpCookie("chariotConsommateurProduit");
+                cookieChariot.Value = null;
+                cookieChariot.Expires = DateTime.Now.AddHours(24);
+                filterContext.HttpContext.Response.AppendCookie(cookieChariot);
             }
         }
     }

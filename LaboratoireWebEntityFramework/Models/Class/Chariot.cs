@@ -10,8 +10,8 @@ namespace LaboratoireWebEntityFramework.Models
     public class Chariot 
     {
         //COLUMN SQL SERVER BIG INT its necessary to work with INT64
-        public Int64 Id_Chariot { get; set; }
-        public Int32 Id_Produit { get; set; }
+        public Int64 IdChariot { get; set; }
+        public Int32 IdProduit { get; set; }
         public Guid IdConsommateur { get; set; }
         public int Quantite { get; set; }
         public decimal ValeurUnitaire { get; set; }

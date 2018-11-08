@@ -15,10 +15,10 @@ namespace LaboratoireWebEntityFramework.Infrastructure
             Database.SetInitializer<LaboratoireContext>(null);
         }
 
-        public DbSet<ClientSession> ClientSessions_ { get; set; }
-        public DbSet<Chariot> Chariots_ { get; set; }
-        public DbSet<Categorie> Categories_ { get; set; }
-        public DbSet<Produit> Produits_ { get; set; }
+        public DbSet<ClientSession> ClientSessions { get; set; }
+        public DbSet<Chariot> Chariots { get; set; }
+        public DbSet<Categorie> Categories { get; set; }
+        public DbSet<Produit> Produits { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

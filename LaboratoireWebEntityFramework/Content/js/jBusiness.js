@@ -21,6 +21,7 @@ $(document).ready(function () {
 
 });
 
+
 function TitrePageWeb() {
 
     if ($("#indexHome").length > 0) {
@@ -262,7 +263,7 @@ function ProductsByCategory(idCategorie) {
                         + '                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>'
                         + '            </a>'
                         + '            <div class="block2-btn-addcart w-size1 trans-0-4">'
-                        + '               <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" onclick="AjouterProduitChariot(' + data.dataResult[count].Id_Produit + ')">'
+                        + '               <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" onclick="AjouterProduitChariot(' + data.dataResult[count].IdProduit + ')">'
                         + '                 ' + $('#texteButtonChariot').val()
                         + '                </button>'
                         + '            </div>'
@@ -349,7 +350,7 @@ function ProductsByCategoryAll() {
                         + '                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>'
                         + '            </a>'
                         + '            <div class="block2-btn-addcart w-size1 trans-0-4">'
-                        + '               <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" onclick="AjouterProduitChariot(' + data.dataResult[count].Id_Produit + ')">'
+                        + '               <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" onclick="AjouterProduitChariot(' + data.dataResult[count].IdProduit + ')">'
                         + '                 ' + $('#texteButtonChariot').val()
                         + '                </button>'
                         + '            </div>'
@@ -468,7 +469,7 @@ function ChariotConsommateur(resultaChariotConsommateur) {
 
                 htmlResultChariotConsommateur += '<tr class="table-row">'
                                                     + '   <td class="column-1">'
-                                                    + '       <div class="cart-img-product b-rad-4 o-f-hidden" title="Cliquez sur l&#39;image pour supprimer !!!" onclick="SupprimerProduitChariot(' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit + ');">'
+                                                    + '       <div class="cart-img-product b-rad-4 o-f-hidden" title="Cliquez sur l&#39;image pour supprimer !!!" onclick="SupprimerProduitChariot(' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.IdProduit + ');">'
                                                     + '           <img src="/Content/images/' + (resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Sku === null ? 'pas_dImage' : resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Sku) + '.jpg" alt="IMG-PRODUCT">'
                                                     + '       </div>'
                                                     + '   </td>'
@@ -476,11 +477,11 @@ function ChariotConsommateur(resultaChariotConsommateur) {
                                                     + '   <td class="column-3">$' + currency(resultaChariotConsommateur.responseJSON.dataResult[count].ValeurUnitaire) + '</td>'
                                                     + '   <td class="column-4">'
                                                     + '       <div class="flex-w bo5 of-hidden w-size17">'
-                                                    + '           <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2" name="buttonDownProduct' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit +'">'
+                                                    + '           <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2" name="buttonDownProduct' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.IdProduit +'">'
                                                     + '               <i class="fs-12 fa fa-minus" aria-hidden="true"></i>'
                                                     + '           </button>'
-                                                    + '           <input class="size8 m-text18 t-center num-product" type="number" id="numProductId' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit + '" name="numProductId' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit + '" value="' + resultaChariotConsommateur.responseJSON.dataResult[count].Quantite + '">'
-                                                    + '           <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2" name="buttonUpProduct' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit + '">'
+                                                    + '           <input class="size8 m-text18 t-center num-product" type="number" id="numProductId' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.IdProduit + '" name="numProductId' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.IdProduit + '" value="' + resultaChariotConsommateur.responseJSON.dataResult[count].Quantite + '">'
+                                                    + '           <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2" name="buttonUpProduct' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.IdProduit + '">'
                                                     + '               <i class="fs-12 fa fa-plus" aria-hidden="true"></i>'
                                                     + '           </button>'
                                                     + '       </div>'
@@ -594,6 +595,7 @@ function ChariotConsommateurPetit(resultaChariotConsommateur) {
     var quantiteProduits = 0;
 
     if (resultaChariotConsommateur.responseJSON.dataResult.length <= 0) {
+        $.cookie("chariotConsommateurProduit", null);
         $("#petitChariotConsommateur").empty();
         $('#petitChariotConsommateurQte').text(0);
         $(".header-icons-noti").css('background-color', '#111111');
@@ -606,12 +608,12 @@ function ChariotConsommateurPetit(resultaChariotConsommateur) {
     } else {
         $('#petitChariotConsommateurQte').text(0);
         $("#petitChariotConsommateur").empty();
-
+        $.cookie("chariotConsommateurProduit", null);
         for (var count = 0; count < resultaChariotConsommateur.responseJSON.dataResult.length; count++) {
 
             htmlResultChariotConsommateur += '<ul class="header-cart-wrapitem">'
                                             + '   <li class="header-cart-item">'
-                                            + '        <div class="header-cart-item-img title="Cliquez sur l&#39;image pour supprimer !!!" onclick="ProductDetail(' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Id_Produit + ');"">'
+                                            + '        <div class="header-cart-item-img title="Cliquez sur l&#39;image pour supprimer !!!" onclick="ProductDetail(' + resultaChariotConsommateur.responseJSON.dataResult[count].Produit.IdProduit + ');"">'
                                             + '            <img src="/Content/images/' + (resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Sku === null ? 'pas_dImage' : resultaChariotConsommateur.responseJSON.dataResult[count].Produit.Sku) + '.jpg" alt="IMG">'
                                             + '        </div>'
                                             + '        <div class="header-cart-item-txt">'
@@ -654,6 +656,14 @@ function ChariotConsommateurPetit(resultaChariotConsommateur) {
         $(".header-icons-noti").css('background-color', '#e65540');
         $(".header-icons-noti").css('width', '21px');
         $(".header-icons-noti").css('height', '21px');
+
+        
+        //ça marche une parte
+        $.cookie("chariotConsommateurProduit", htmlResultChariotConsommateur);
+
+        $.cookie("chariotConsommateurProduit", $('#headerPetitChariotConsommateur').clone(true));
+
+
 
         return false;
     }
@@ -703,6 +713,8 @@ function AjouterProduitChariot(idProduit) {
 
             if (data.dataResult === true) {
                 //ChariotConsomateurPage();
+                var resultaChariotConsommateur = ChariotConsommateurProduits($.cookie('idConsommateurSession'));
+                ChariotConsommateurPetit(resultaChariotConsommateur);
             }
         },
 
@@ -816,6 +828,26 @@ function SupprimerProduitChariot(idProduit) {
         }
     });
     return false;
+}
+
+//en cours....
+function ConsommateurChariotTemp() {
+
+    var chariotTemp = $.cookie("chariotConsommateurProduit");
+
+    if (chariotTemp !== null || chariotTemp !== undefined) {
+        //$('#petitChariotConsommateur').append(chariotTemp);
+        //$(".header-icons-noti").css('background-color', '#e65540');
+        //$(".header-icons-noti").css('width', '21px');
+        //$(".header-icons-noti").css('height', '21px');
+
+        //chariotTemp.appendTo('#headerPetitChariotConsommateur');
+
+        $('#headerPetitChariotConsommateur').prepend(chariotTemp);
+    }
+
+    //var resultaChariotConsommateur = ChariotConsommateurProduits($.cookie('idConsommateurSession'));
+    //ChariotConsommateurPetit(resultaChariotConsommateur);
 }
 
 /* LOADING */

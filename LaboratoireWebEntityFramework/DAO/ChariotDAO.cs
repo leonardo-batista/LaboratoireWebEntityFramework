@@ -30,7 +30,7 @@ namespace LaboratoireWebEntityFramework.DAO
 
                 //1er Option de Requete
                 logger.Info("Requête, Liste des Produits du Consommateur");
-                return context.Chariots_.Include("Produit").OrderBy(cha => cha.DateCreation).Where(cha => cha.IdConsommateur == new Guid(idConsommateur)).ToList();
+                return context.Chariots.Include("Produit").OrderBy(cha => cha.DateCreation).Where(cha => cha.IdConsommateur == new Guid(idConsommateur)).ToList();
 
                 //2eme Option de Requete
                 //var lista = (from p in context.Chariots_.Include("Produit")
@@ -61,8 +61,8 @@ namespace LaboratoireWebEntityFramework.DAO
             try
             {
                 logger.Info("Requête, Liste des Produits du Consommateur");
-                var resultat = (from p in context.Chariots_
-                                where p.IdConsommateur == new Guid(idConsommateur) && p.Id_Produit == idProduit
+                var resultat = (from p in context.Chariots
+                                where p.IdConsommateur == new Guid(idConsommateur) && p.IdProduit == idProduit
                                 select p).SingleOrDefault();
 
                 if (resultat != null)
@@ -79,21 +79,21 @@ namespace LaboratoireWebEntityFramework.DAO
                 else
                 {
                     logger.Info("Requetê, Verifiér si il y a de Produit avant de Ajouter au Chariot/Panner, SessionConsommateur: " + idConsommateur);
-                    var restultatProduit = (from p in context.Produits_
-                                            where p.Id_Produit == idProduit
+                    var restultatProduit = (from p in context.Produits
+                                            where p.IdProduit == idProduit
                                             select p).SingleOrDefault();
 
                     if (restultatProduit != null)
                     {
                         Chariot chariot = new Chariot();
                         chariot.IdConsommateur = new Guid(idConsommateur);
-                        chariot.Id_Produit = restultatProduit.Id_Produit;
+                        chariot.IdProduit = restultatProduit.IdProduit;
                         chariot.ValeurUnitaire = restultatProduit.Valeur;
                         chariot.ValeurTotalArticle = restultatProduit.Valeur * 1;
                         chariot.Quantite = 1;
                         chariot.Actif = true;
 
-                        context.Chariots_.Add(chariot);
+                        context.Chariots.Add(chariot);
                         context.SaveChanges();
                         logger.Info("SaveChagens(), Consommateur a ajouté le Produit, Session: " + idConsommateur);
 
@@ -128,8 +128,8 @@ namespace LaboratoireWebEntityFramework.DAO
             try
             {
                 logger.Info("Requête, Liste des Produits du Consommateur");
-                var resultat = (from p in context.Chariots_
-                                where p.IdConsommateur == new Guid(idConsommateur) && p.Id_Produit == idProduit
+                var resultat = (from p in context.Chariots
+                                where p.IdConsommateur == new Guid(idConsommateur) && p.IdProduit == idProduit
                                 select p).SingleOrDefault();
 
                 if (resultat != null)
@@ -168,13 +168,13 @@ namespace LaboratoireWebEntityFramework.DAO
             try
             {
                 logger.Info("Requête, Liste des Produits du Consommateur, Session: " + idConsommateur);
-                var resultat = (from p in context.Chariots_
-                                where p.IdConsommateur == new Guid(idConsommateur) && p.Id_Produit == idProduit
+                var resultat = (from p in context.Chariots
+                                where p.IdConsommateur == new Guid(idConsommateur) && p.IdProduit == idProduit
                                 select p).SingleOrDefault();
 
                 if (resultat != null)
                 {
-                    context.Chariots_.Remove(resultat);
+                    context.Chariots.Remove(resultat);
                     context.SaveChanges();
                     logger.Info("Supprimer, Le Consommateur a supprimé le produit, Session: " + idConsommateur);
 

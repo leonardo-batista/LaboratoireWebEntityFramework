@@ -15,10 +15,10 @@ namespace LaboratoireWebEntityFramework.Cartographie
         {
             ToTable("TB_CHARIOT_TEMP");
 
-            HasKey(cha => cha.Id_Chariot);
-            //Property(cha => cha.IdChariot).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).HasColumnName("ID_CHARIOT");
+            HasKey(cha => cha.IdChariot);
+            Property(cha => cha.IdChariot).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).HasColumnName("ID_CHARIOT");
             Property(cha => cha.IdConsommateur).HasColumnName("ID_CONSOMMATEUR").HasColumnType("uniqueidentifier");
-            Property(cha => cha.Id_Produit).HasColumnName("ID_PRODUIT");
+            Property(cha => cha.IdProduit).HasColumnName("ID_PRODUIT");
             Property(cha => cha.Quantite).HasColumnName("QUANTITE");
             Property(cha => cha.ValeurUnitaire).HasColumnName("VALEUR_UNITAIRE");
             Property(cha => cha.ValeurTotalArticle).HasColumnName("VALEUR_TOTAL_ARTICLE");

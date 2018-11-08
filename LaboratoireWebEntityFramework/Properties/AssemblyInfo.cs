@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("LaboratoireWebEntityFramework")]
-[assembly: AssemblyDescription("Technologies: EF, SQL Server, Log4Net")]
+[assembly: AssemblyDescription("Technologies: EF, SQL Server, Log4Net, jQuery")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Etudiant")]
 [assembly: AssemblyProduct("LaboratoireWebEntityFramework")]
