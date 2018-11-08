@@ -401,15 +401,15 @@ function ProductsByCategoryAll() {
 //PAGE CHARIOT
 function ChariotConsomateurPage() {
 
+    var resultaChariotConsommateur = ChariotConsommateurProduits($.cookie('idConsommateurSession'));
+
+    ChariotConsommateurPetit(resultaChariotConsommateur);
+
     if ($("#indexChariot").length === 0) {
         return false;
     }
 
-    var resultaChariotConsommateur = ChariotConsommateurProduits($.cookie('idConsommateurSession'));
-
     ChariotConsommateur(resultaChariotConsommateur);
-
-    ChariotConsommateurPetit(resultaChariotConsommateur);
 
     $('.btn-num-product-down').on('click', function (e) {
         var numeroAttrName = 0;
@@ -595,7 +595,6 @@ function ChariotConsommateurPetit(resultaChariotConsommateur) {
     var quantiteProduits = 0;
 
     if (resultaChariotConsommateur.responseJSON.dataResult.length <= 0) {
-        $.cookie("chariotConsommateurProduit", null);
         $("#petitChariotConsommateur").empty();
         $('#petitChariotConsommateurQte').text(0);
         $(".header-icons-noti").css('background-color', '#111111');
@@ -656,15 +655,6 @@ function ChariotConsommateurPetit(resultaChariotConsommateur) {
         $(".header-icons-noti").css('background-color', '#e65540');
         $(".header-icons-noti").css('width', '21px');
         $(".header-icons-noti").css('height', '21px');
-
-        
-        //ça marche une parte
-        $.cookie("chariotConsommateurProduit", htmlResultChariotConsommateur);
-
-        $.cookie("chariotConsommateurProduit", $('#headerPetitChariotConsommateur').clone(true));
-
-
-
         return false;
     }
 }
@@ -828,26 +818,6 @@ function SupprimerProduitChariot(idProduit) {
         }
     });
     return false;
-}
-
-//en cours....
-function ConsommateurChariotTemp() {
-
-    var chariotTemp = $.cookie("chariotConsommateurProduit");
-
-    if (chariotTemp !== null || chariotTemp !== undefined) {
-        //$('#petitChariotConsommateur').append(chariotTemp);
-        //$(".header-icons-noti").css('background-color', '#e65540');
-        //$(".header-icons-noti").css('width', '21px');
-        //$(".header-icons-noti").css('height', '21px');
-
-        //chariotTemp.appendTo('#headerPetitChariotConsommateur');
-
-        $('#headerPetitChariotConsommateur').prepend(chariotTemp);
-    }
-
-    //var resultaChariotConsommateur = ChariotConsommateurProduits($.cookie('idConsommateurSession'));
-    //ChariotConsommateurPetit(resultaChariotConsommateur);
 }
 
 /* LOADING */

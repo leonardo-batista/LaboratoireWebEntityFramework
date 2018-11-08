@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace LaboratoireWebEntityFramework.Controllers
 {
@@ -35,6 +36,7 @@ namespace LaboratoireWebEntityFramework.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration = 3600, VaryByParam = "idConsommateur", Location = OutputCacheLocation.Server)]
         public JsonResult ChariotConsommateur(string idConsommateur)
         {
             try
@@ -55,6 +57,9 @@ namespace LaboratoireWebEntityFramework.Controllers
         {
             try
             {
+                var urlToRemove = Url.Action("ChariotConsommateur", "Chariot");
+                HttpResponse.RemoveOutputCacheItem(urlToRemove);
+
                 return Json(new
                 {
                     dataResult = chariotDAO.ChariotAjouterProduit(idConsommateur, idProduit)
@@ -71,6 +76,9 @@ namespace LaboratoireWebEntityFramework.Controllers
         {
             try
             {
+                var urlToRemove = Url.Action("ChariotConsommateur", "Chariot");
+                HttpResponse.RemoveOutputCacheItem(urlToRemove);
+
                 return Json(new
                 {
                     dataResult = chariotDAO.ChariotMiseAjourQuantite(idConsommateur, idProduit, quantite)
@@ -87,6 +95,8 @@ namespace LaboratoireWebEntityFramework.Controllers
         {
             try
             {
+                var urlToRemove = Url.Action("ChariotConsommateur", "Chariot");
+                HttpResponse.RemoveOutputCacheItem(urlToRemove);
                 return Json(new
                 {
                     dataResult = chariotDAO.ChariotSupprimerProduit(idConsommateur, idProduit)
