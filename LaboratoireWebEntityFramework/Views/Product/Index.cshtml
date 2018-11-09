@@ -71,6 +71,14 @@
                 <div class="flex-sb-m flex-w p-b-35">
                     <div class="flex-w">
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+                            <select class="selection-2" name="affichagePerPage" id="affichagePerPage">
+                                <option selected value="3">Pagination 3</option>
+                                <option value="6">Pagination 6</option>
+                                <option value="9">Pagination 9</option>
+                            </select>
+                        </div>
+
+                        <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
                             <select class="selection-2" name="sorting">
                                 <option>Default Sorting</option>
                                 <option>Popularity</option>
@@ -93,7 +101,7 @@
                     </div>
 
                     <span class="s-text8 p-t-5 p-b-5">
-                        Showing 1–12 of 16 results
+                        Showing 1–<span id="quantiteAffiche">0</span> of <span id="quantiteProduits">0 results</span>
                     </span>
                 </div>
 
@@ -103,9 +111,8 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="pagination flex-m flex-w p-t-26">
-                    <a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-                    <a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
+                <div class="pagination flex-m flex-w p-t-26" id="buttonsPagination">
+
                 </div>
             </div>
         </div>
