@@ -97,6 +97,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Appliquer Coupon.
+        /// </summary>
+        internal static string AppliquerCoupon {
+            get {
+                return ResourceManager.GetString("AppliquerCoupon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to À propos.
         /// </summary>
         internal static string Apropos {
@@ -142,11 +151,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check Out.
+        /// </summary>
+        internal static string CheckOut {
+            get {
+                return ResourceManager.GetString("CheckOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact.
         /// </summary>
         internal static string Contact {
             get {
                 return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code Promo.
+        /// </summary>
+        internal static string CouponCode {
+            get {
+                return ResourceManager.GetString("CouponCode", resourceCulture);
             }
         }
         
@@ -228,6 +255,15 @@ namespace Resources {
         internal static string Meuble {
             get {
                 return ResourceManager.GetString("Meuble", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mise à jour panier.
+        /// </summary>
+        internal static string MiseJourPanier {
+            get {
+                return ResourceManager.GetString("MiseJourPanier", resourceCulture);
             }
         }
         
