@@ -3,6 +3,15 @@ $(document).ready(function () {
 
     //ON CLICK
 
+    //CHANGE VALUE
+    $("#affichagePerPage").change(function () {
+        ProductsByCategoryV2($.cookie("CategorieIdTemporaire"));
+    });
+
+    $("#sortingProduct").change(function () {
+        ProductsByCategoryV2($.cookie("CategorieIdTemporaire"));
+    });
+
     //CHARGER TITRE PAR PAGE
     TitrePageWeb();
 
@@ -12,9 +21,7 @@ $(document).ready(function () {
     //PAGE PRODUCT
     FilterBar();
 
-    //ProductsByCategoryAll();
-
-    ProductsByCategoryV2('');
+    ProductsByCategoryV2($.cookie("CategorieIdTemporaire"));
 
     ListeDesCategoriePageProduct();
 
@@ -24,7 +31,6 @@ $(document).ready(function () {
 });
 
 
-//var resultProduit = [];
 var listProduit;
 
 function TitrePageWeb() {
@@ -231,7 +237,7 @@ function ProductDetail(idProduct) {
     return false;
 }
 
-//pagination ici !!!
+//OLD FUNCTION
 function ProductsByCategory(idCategorie) {
 
     if ($("#indexProduct").length === 0) {
@@ -319,7 +325,7 @@ function ProductsByCategory(idCategorie) {
     return false;
 }
 
-//pagination ici !!!
+//OLD FUNCTION
 function ProductsByCategoryAll() {
 
     if ($("#indexProduct").length === 0) {
@@ -411,7 +417,7 @@ function ProductsByCategoryAll() {
     return false;
 }
 
-//teste
+//PAGINATION
 function PaginationProduits(pageActuel) {
 
     if ($("#indexProduct").length === 0) {
@@ -423,19 +429,13 @@ function PaginationProduits(pageActuel) {
     }
 
     var resultProduit = [];
-    //console.log('resultProduit');
-    //console.log(resultProduit);
 
     var buttons = '';
-    var quantiteProduitParPage = 0; //$('#affichagePerPage').val();
+    var quantiteProduitParPage = 0;
 
     quantiteProduitParPage = Number($('#affichagePerPage').val());
 
-    //console.log(listProduit);
-
-    //fazemos uma calculo simples para saber quantas paginas existiram
     var numeroTotalPage = Math.ceil(listProduit.length / quantiteProduitParPage);
-    //console.log(numeroTotalPage);
 
     $("#buttonsPagination").empty();
 
@@ -451,32 +451,57 @@ function PaginationProduits(pageActuel) {
     $("#buttonsPagination").append(buttons);
     $('#buttonPage' + pageActuel).addClass("active-pagination");
 
+    var orderBy = 0;
+    var orderByArray = [];
+
+    orderBy = Number($('#sortingProduct').val());
+    
+
+    for (var counter = 0; counter < listProduit.length; counter++) {
+        orderByArray.push(listProduit[counter]);
+    }
+
+    //Popularité
+    //if (orderBy === 1) {
+    // AU FUTURE, PORQUOI PAS !!!
+    //}
+
+    //De Bas En Haut
+    if (orderBy === 2) {
+        orderByArray.sort(function (a, b) {
+            return a.Valeur - b.Valeur
+        });
+    }
+
+    //Haut En Bas
+    if (orderBy === 3) {
+        orderByArray.sort(function (a, b) {
+            return b.Valeur - a.Valeur
+        });
+    }
+
     let totalPage = Math.ceil(listProduit.length / quantiteProduitParPage);
     let count = (pageActuel * quantiteProduitParPage) - quantiteProduitParPage;
     let delimiter = count + quantiteProduitParPage;
 
-
-
     if (pageActuel <= totalPage) {
         for (let i = count; i < delimiter; i++) {
-            if (listProduit[i] != null) {
-                resultProduit.push(listProduit[i]);
+            if (orderByArray[i] != null) {
+                resultProduit.push(orderByArray[i]);
             }
             count++;
         }
     }
 
-    //delimiter = 0;
-    //quantiteProduitParPage = 0;
-
-    //console.log('delimiter ' + delimiter);
-    //console.log('quantiteProduitParPage ' + quantiteProduitParPage);
-    //console.log('numeroTotalPage ' + numeroTotalPage);
-    //console.log('totalPage ' + totalPage);
-    //console.log('pageActuel ' + pageActuel);
-    //console.log(resultProduit);
-
-    //return false;
+    //original et ça marche très bien !!!
+    //if (pageActuel <= totalPage) {
+    //    for (let i = count; i < delimiter; i++) {
+    //        if (listProduit[i] != null) {
+    //            resultProduit.push(listProduit[i]);
+    //        }
+    //        count++;
+    //    }
+    //}
 
     var htmlResultAllProducts = '';
 
@@ -518,13 +543,9 @@ function PaginationProduits(pageActuel) {
     }
 }
 
-
 function ProductsByCategoryV2(idCategorie) {
-
-    //console.log('ProductsByCategoryV2... ' + idCategorie);
-
+    
     if (idCategorie === undefined || idCategorie === 0 || idCategorie === '') {
-        //console.log('Consulta Todas Categoria: ');
         Loading();
 
         $.ajax({
@@ -538,8 +559,6 @@ function ProductsByCategoryV2(idCategorie) {
                 if (data.dataResult !== null) {
                     listProduit = data.dataResult;
                     $('#quantiteProduits').text(data.dataResult.length);
-                    //console.log('ListeDeProduitsParCategorieTous');
-                    //console.log(listProduit);
                     PaginationProduits('');
                 }
             },
@@ -565,13 +584,7 @@ function ProductsByCategoryV2(idCategorie) {
         });
     }
 
-    //console.log('Sai do 1o if');
-
-    ////console.log(isNaN(idCategorie));
-
     if (!isNaN(idCategorie) === true && Number(idCategorie) >0) {
-
-        //console.log('Consulta por Categoria, entrei no IF: ' + idCategorie);
         Loading();
 
         $.ajax({
@@ -586,8 +599,6 @@ function ProductsByCategoryV2(idCategorie) {
                 if (data.dataResult !== null) {
                     listProduit = data.dataResult;
                     $('#quantiteProduits').text(data.dataResult.length);
-                    //console.log('ListeDeProduitsParCategorie');
-                    //console.log(listProduit);
                     PaginationProduits('');
                 } 
             },
@@ -614,8 +625,6 @@ function ProductsByCategoryV2(idCategorie) {
     }
 
 }
-
-
 
 //PAGE CHARIOT
 function ChariotConsomateurPage() {
@@ -670,8 +679,6 @@ function ChariotConsommateur(resultaChariotConsommateur) {
     $("#chariotConsommateur").empty();
 
     if (resultaChariotConsommateur.responseJSON.dataResult.length > 0) {
-
-        //if (resultaChariotConsommateur.responseJSON.dataResult !== null || resultaChariotConsommateur.responseJSON.dataResult !== '' || resultaChariotConsommateur.responseJSON.dataResult.length > 0) {
 
             htmlResultChariotConsommateur = '<div class="container-table-cart pos-relative">'
                                                 + '<div class="wrap-table-shopping-cart bgwhite">'
@@ -920,7 +927,6 @@ function AjouterProduitChariot(idProduit) {
         success: function (data) {
 
             if (data.dataResult === true) {
-                //ChariotConsomateurPage();
                 var resultaChariotConsommateur = ChariotConsommateurProduits($.cookie('idConsommateurSession'));
                 ChariotConsommateurPetit(resultaChariotConsommateur);
             }

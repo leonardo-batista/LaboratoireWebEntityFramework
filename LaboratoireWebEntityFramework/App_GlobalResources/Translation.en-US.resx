@@ -189,4 +189,34 @@
   <data name="NouveauxProduits" xml:space="preserve">
     <value>New products</value>
   </data>
+  <data name="Aide" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="Bulletin" xml:space="preserve">
+    <value>Newsletter</value>
+  </data>
+  <data name="Liens" xml:space="preserve">
+    <value>Links</value>
+  </data>
+  <data name="LivraisonMessage" xml:space="preserve">
+    <value>Free delivery everywhere in Quebec</value>
+  </data>
+  <data name="Sport" xml:space="preserve">
+    <value>Sport</value>
+  </data>
+  <data name="Vetement" xml:space="preserve">
+    <value>Dresses</value>
+  </data>
+  <data name="DeBasEnHaut" xml:space="preserve">
+    <value>low to high</value>
+  </data>
+  <data name="HautEnBas" xml:space="preserve">
+    <value>high to low</value>
+  </data>
+  <data name="Popularite" xml:space="preserve">
+    <value>Popularity</value>
+  </data>
+  <data name="TriParDefaut" xml:space="preserve">
+    <value>Default Sorting</value>
+  </data>
 </root>

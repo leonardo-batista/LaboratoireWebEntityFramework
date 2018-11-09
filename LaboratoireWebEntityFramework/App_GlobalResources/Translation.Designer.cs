@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aide-moi.
+        /// </summary>
+        internal static string Aide {
+            get {
+                return ResourceManager.GetString("Aide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ajouter.
         /// </summary>
         internal static string AjouterChariot {
@@ -102,6 +111,15 @@ namespace Resources {
         internal static string Boutique {
             get {
                 return ResourceManager.GetString("Boutique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bulletin.
+        /// </summary>
+        internal static string Bulletin {
+            get {
+                return ResourceManager.GetString("Bulletin", resourceCulture);
             }
         }
         
@@ -133,6 +151,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to de bas en haut.
+        /// </summary>
+        internal static string DeBasEnHaut {
+            get {
+                return ResourceManager.GetString("DeBasEnHaut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filtre.
         /// </summary>
         internal static string Filtre {
@@ -151,6 +178,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to haut en bas.
+        /// </summary>
+        internal static string HautEnBas {
+            get {
+                return ResourceManager.GetString("HautEnBas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informatique.
         /// </summary>
         internal static string Informatique {
@@ -165,6 +201,24 @@ namespace Resources {
         internal static string Intervalle {
             get {
                 return ResourceManager.GetString("Intervalle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Liens.
+        /// </summary>
+        internal static string Liens {
+            get {
+                return ResourceManager.GetString("Liens", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Livraison gratuit partout au Québec.
+        /// </summary>
+        internal static string LivraisonMessage {
+            get {
+                return ResourceManager.GetString("LivraisonMessage", resourceCulture);
             }
         }
         
@@ -223,6 +277,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Popularité.
+        /// </summary>
+        internal static string Popularite {
+            get {
+                return ResourceManager.GetString("Popularite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prix.
         /// </summary>
         internal static string Prix {
@@ -268,11 +331,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sport.
+        /// </summary>
+        internal static string Sport {
+            get {
+                return ResourceManager.GetString("Sport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tous.
         /// </summary>
         internal static string Tous {
             get {
                 return ResourceManager.GetString("Tous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tri par défaut.
+        /// </summary>
+        internal static string TriParDefaut {
+            get {
+                return ResourceManager.GetString("TriParDefaut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vêtement.
+        /// </summary>
+        internal static string Vetement {
+            get {
+                return ResourceManager.GetString("Vetement", resourceCulture);
             }
         }
     }

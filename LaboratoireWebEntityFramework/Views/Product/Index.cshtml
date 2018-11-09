@@ -79,23 +79,11 @@
                         </div>
 
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <select class="selection-2" name="sorting">
-                                <option>Default Sorting</option>
-                                <option>Popularity</option>
-                                <option>@Resources.Translation.Prix: low to high</option>
-                                <option>@Resources.Translation.Prix: high to low</option>
-                            </select>
-                        </div>
-
-                        <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <select class="selection-2" name="sorting">
-                                <option>@Resources.Translation.Prix</option>
-                                <option>$0.00 - $50.00</option>
-                                <option>$50.00 - $100.00</option>
-                                <option>$100.00 - $150.00</option>
-                                <option>$150.00 - $200.00</option>
-                                <option>$200.00+</option>
-
+                            <select class="selection-2" name="sortingProduct" id="sortingProduct">
+                                <option selected value="0">@Resources.Translation.TriParDefaut</option>
+                                @*<option value="1">@Resources.Translation.Popularite</option>*@
+                                <option value="2">@Resources.Translation.Prix: @Resources.Translation.DeBasEnHaut</option>
+                                <option value="3">@Resources.Translation.Prix: @Resources.Translation.HautEnBas</option>
                             </select>
                         </div>
                     </div>
