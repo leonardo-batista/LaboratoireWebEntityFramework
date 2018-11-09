@@ -219,4 +219,16 @@
   <data name="TriParDefaut" xml:space="preserve">
     <value>Default Sorting</value>
   </data>
+  <data name="AppliquerCoupon" xml:space="preserve">
+    <value>Apply Coupon</value>
+  </data>
+  <data name="CheckOut" xml:space="preserve">
+    <value>Check out</value>
+  </data>
+  <data name="CouponCode" xml:space="preserve">
+    <value>Coupon Code</value>
+  </data>
+  <data name="MiseJourPanier" xml:space="preserve">
+    <value>Update Cart</value>
+  </data>
 </root>
