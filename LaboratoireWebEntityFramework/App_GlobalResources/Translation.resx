@@ -189,4 +189,46 @@
   <data name="NouveauxProduits" xml:space="preserve">
     <value>Nouveaux produits</value>
   </data>
+  <data name="Aide" xml:space="preserve">
+    <value>Aide-moi</value>
+  </data>
+  <data name="Bulletin" xml:space="preserve">
+    <value>Bulletin</value>
+  </data>
+  <data name="Liens" xml:space="preserve">
+    <value>Liens</value>
+  </data>
+  <data name="LivraisonMessage" xml:space="preserve">
+    <value>Livraison gratuit partout au Québec</value>
+  </data>
+  <data name="Sport" xml:space="preserve">
+    <value>Sport</value>
+  </data>
+  <data name="Vetement" xml:space="preserve">
+    <value>Vêtement</value>
+  </data>
+  <data name="DeBasEnHaut" xml:space="preserve">
+    <value>de bas en haut</value>
+  </data>
+  <data name="HautEnBas" xml:space="preserve">
+    <value>haut en bas</value>
+  </data>
+  <data name="Popularite" xml:space="preserve">
+    <value>Popularité</value>
+  </data>
+  <data name="TriParDefaut" xml:space="preserve">
+    <value>Tri par défaut</value>
+  </data>
+  <data name="AppliquerCoupon" xml:space="preserve">
+    <value>Appliquer Coupon</value>
+  </data>
+  <data name="CheckOut" xml:space="preserve">
+    <value>Check Out</value>
+  </data>
+  <data name="CouponCode" xml:space="preserve">
+    <value>Code Promo</value>
+  </data>
+  <data name="MiseJourPanier" xml:space="preserve">
+    <value>Mise à jour panier</value>
+  </data>
 </root>

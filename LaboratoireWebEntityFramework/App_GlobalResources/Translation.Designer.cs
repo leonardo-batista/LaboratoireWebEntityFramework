@@ -79,11 +79,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aide-moi.
+        /// </summary>
+        internal static string Aide {
+            get {
+                return ResourceManager.GetString("Aide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ajouter.
         /// </summary>
         internal static string AjouterChariot {
             get {
                 return ResourceManager.GetString("AjouterChariot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Appliquer Coupon.
+        /// </summary>
+        internal static string AppliquerCoupon {
+            get {
+                return ResourceManager.GetString("AppliquerCoupon", resourceCulture);
             }
         }
         
@@ -106,6 +124,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bulletin.
+        /// </summary>
+        internal static string Bulletin {
+            get {
+                return ResourceManager.GetString("Bulletin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Categories.
         /// </summary>
         internal static string Categories {
@@ -124,11 +151,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check Out.
+        /// </summary>
+        internal static string CheckOut {
+            get {
+                return ResourceManager.GetString("CheckOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact.
         /// </summary>
         internal static string Contact {
             get {
                 return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code Promo.
+        /// </summary>
+        internal static string CouponCode {
+            get {
+                return ResourceManager.GetString("CouponCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to de bas en haut.
+        /// </summary>
+        internal static string DeBasEnHaut {
+            get {
+                return ResourceManager.GetString("DeBasEnHaut", resourceCulture);
             }
         }
         
@@ -151,6 +205,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to haut en bas.
+        /// </summary>
+        internal static string HautEnBas {
+            get {
+                return ResourceManager.GetString("HautEnBas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informatique.
         /// </summary>
         internal static string Informatique {
@@ -169,11 +232,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Liens.
+        /// </summary>
+        internal static string Liens {
+            get {
+                return ResourceManager.GetString("Liens", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Livraison gratuit partout au Québec.
+        /// </summary>
+        internal static string LivraisonMessage {
+            get {
+                return ResourceManager.GetString("LivraisonMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Meuble.
         /// </summary>
         internal static string Meuble {
             get {
                 return ResourceManager.GetString("Meuble", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mise à jour panier.
+        /// </summary>
+        internal static string MiseJourPanier {
+            get {
+                return ResourceManager.GetString("MiseJourPanier", resourceCulture);
             }
         }
         
@@ -223,6 +313,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Popularité.
+        /// </summary>
+        internal static string Popularite {
+            get {
+                return ResourceManager.GetString("Popularite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prix.
         /// </summary>
         internal static string Prix {
@@ -268,11 +367,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sport.
+        /// </summary>
+        internal static string Sport {
+            get {
+                return ResourceManager.GetString("Sport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tous.
         /// </summary>
         internal static string Tous {
             get {
                 return ResourceManager.GetString("Tous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tri par défaut.
+        /// </summary>
+        internal static string TriParDefaut {
+            get {
+                return ResourceManager.GetString("TriParDefaut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vêtement.
+        /// </summary>
+        internal static string Vetement {
+            get {
+                return ResourceManager.GetString("Vetement", resourceCulture);
             }
         }
     }

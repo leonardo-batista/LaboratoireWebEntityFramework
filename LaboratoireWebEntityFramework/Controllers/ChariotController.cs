@@ -14,6 +14,7 @@ namespace LaboratoireWebEntityFramework.Controllers
     [CacheResponse]
     [HandleExceptionAttribute]
     [EnableCompression]
+    [ConsommateurSessionFilterAttribute]
     public class ChariotController : Controller
     {
         private ChariotDAO chariotDAO;

@@ -3,6 +3,15 @@ $(document).ready(function () {
 
     //ON CLICK
 
+    //CHANGE VALUE
+    $("#affichagePerPage").change(function () {
+        ProductsByCategoryV2($.cookie("CategorieIdTemporaire"));
+    });
+
+    $("#sortingProduct").change(function () {
+        ProductsByCategoryV2($.cookie("CategorieIdTemporaire"));
+    });
+
     //CHARGER TITRE PAR PAGE
     TitrePageWeb();
 
@@ -12,7 +21,7 @@ $(document).ready(function () {
     //PAGE PRODUCT
     FilterBar();
 
-    ProductsByCategoryAll();
+    ProductsByCategoryV2($.cookie("CategorieIdTemporaire"));
 
     ListeDesCategoriePageProduct();
 
@@ -21,6 +30,8 @@ $(document).ready(function () {
 
 });
 
+
+var listProduit;
 
 function TitrePageWeb() {
 
@@ -143,7 +154,7 @@ function ListeDesCategoriePageProduct()
             if (data.dataResult !== null) {
 
                 htmlResultCategories += '<li class="p-t-4">' +
-                    '<a href="javascript:ProductsByCategory(0);" class="s-text13 active1">' +
+                    '<a href="javascript:ProductsByCategoryV2(0);" class="s-text13 active1">' +
                         $('#texteCategoriesTous').val() +
                         '</a></li>';
 
@@ -152,7 +163,7 @@ function ListeDesCategoriePageProduct()
                     $('#nomCategorie' + count).text(data.dataResult[count].NomCaregorie);
 
                     htmlResultCategories += '<li class="p-t-4">' +
-                        '<a href="javascript:ProductsByCategory('+ data.dataResult[count].Id + ')" class="s-text13 active1">' +
+                        '<a href="javascript:ProductsByCategoryV2(' + data.dataResult[count].Id + ')" class="s-text13 active1">' +
                             data.dataResult[count].NomCaregorie +
                             '</a></li>';
                 }
@@ -226,6 +237,7 @@ function ProductDetail(idProduct) {
     return false;
 }
 
+//OLD FUNCTION
 function ProductsByCategory(idCategorie) {
 
     if ($("#indexProduct").length === 0) {
@@ -282,9 +294,11 @@ function ProductsByCategory(idCategorie) {
                 }
 
                 $('#listeDesProduits').append(htmlResultAllProducts);
+                $('#quantiteProduits').text(data.dataResult.length);
 
             } else {
                 $('#listeDesProduits').append(htmlResultAllProducts);
+                $('#quantiteProduits').text(0);
             }
         },
 
@@ -311,6 +325,7 @@ function ProductsByCategory(idCategorie) {
     return false;
 }
 
+//OLD FUNCTION
 function ProductsByCategoryAll() {
 
     if ($("#indexProduct").length === 0) {
@@ -339,6 +354,9 @@ function ProductsByCategoryAll() {
             $("#listeDesProduits").empty();
 
             if (data.dataResult !== null) {
+
+                listProduit = data.dataResult;
+
                 for (var count = 0; count < data.dataResult.length; count++) {                    
                     htmlResultAllProducts += '<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">'
                         + '<div class="block2">'
@@ -369,6 +387,7 @@ function ProductsByCategoryAll() {
                 }
 
                 $('#listeDesProduits').append(htmlResultAllProducts);
+                $('#quantiteProduits').text(data.dataResult.length);
 
             } else {
                 $('#listeDesProduits').append(htmlResultAllProducts);
@@ -396,6 +415,218 @@ function ProductsByCategoryAll() {
         }
     });
     return false;
+}
+
+//PAGINATION
+function PaginationProduits(pageActuel) {
+
+    if ($("#indexProduct").length === 0) {
+        return false;
+    }
+
+    if (pageActuel === null || pageActuel === undefined || pageActuel === '') {
+        pageActuel = 1;
+    }
+
+    var resultProduit = [];
+    var orderBy = 0;
+    var orderByArray = [];
+
+    var buttons = '';
+    var quantiteProduitParPage = 0;
+
+    quantiteProduitParPage = Number($('#affichagePerPage').val());
+
+    var numeroTotalPage = Math.ceil(listProduit.length / quantiteProduitParPage);
+
+    $("#buttonsPagination").empty();
+
+    for (var i = 1; i <= numeroTotalPage; i++) {
+
+        if (i == 1) {
+            buttons = '<a href="#" class="item-pagination flex-c-m trans-0-4" id="buttonPage' + i + '" onclick="PaginationProduits(' + i + ')">1</a>';
+        } else {
+            buttons += '<a href="#" class="item-pagination flex-c-m trans-0-4" id="buttonPage' + i + '" onclick="PaginationProduits(' + i + ')">' + i + '</a>';
+        }
+    }
+
+    $("#buttonsPagination").append(buttons);
+    $('#buttonPage' + pageActuel).addClass("active-pagination");
+
+    orderBy = Number($('#sortingProduct').val());
+
+
+    for (var counter = 0; counter < listProduit.length; counter++) {
+        orderByArray.push(listProduit[counter]);
+    }
+
+    //Popularité
+    //if (orderBy === 1) {
+    // AU FUTURE, PORQUOI PAS !!!
+    //}
+
+    //De Bas En Haut
+    if (orderBy === 2) {
+        orderByArray.sort(function (a, b) {
+            return a.Valeur - b.Valeur
+        });
+    }
+
+    //Haut En Bas
+    if (orderBy === 3) {
+        orderByArray.sort(function (a, b) {
+            return b.Valeur - a.Valeur
+        });
+    }
+
+    let totalPage = Math.ceil(listProduit.length / quantiteProduitParPage);
+    let count = (pageActuel * quantiteProduitParPage) - quantiteProduitParPage;
+    let delimiter = count + quantiteProduitParPage;
+
+    if (pageActuel <= totalPage) {
+        for (let i = count; i < delimiter; i++) {
+            if (orderByArray[i] != null) {
+                resultProduit.push(orderByArray[i]);
+            }
+            count++;
+        }
+    }
+
+    //original et ça marche très bien !!!
+    //if (pageActuel <= totalPage) {
+    //    for (let i = count; i < delimiter; i++) {
+    //        if (listProduit[i] != null) {
+    //            resultProduit.push(listProduit[i]);
+    //        }
+    //        count++;
+    //    }
+    //}
+
+    var htmlResultAllProducts = '';
+
+    if (resultProduit.length > 0) {
+        $("#listeDesProduits").empty();
+        for (var i = 0; i < resultProduit.length; i++) {
+            htmlResultAllProducts += '<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">'
+                + '<div class="block2">'
+                + '    <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">'
+                + '        <img src="/Content/images/' + (resultProduit[i].Sku === null ? 'pas_dImage' : resultProduit[i].Sku) + '.jpg" alt="IMG-PRODUCT">'
+                + '        <div class="block2-overlay trans-0-4">'
+                + '           <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">'
+                + '                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>'
+                + '                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>'
+                + '            </a>'
+                + '            <div class="block2-btn-addcart w-size1 trans-0-4">'
+                + '               <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" onclick="AjouterProduitChariot(' + resultProduit[i].IdProduit + ')">'
+                + '                 ' + $('#texteButtonChariot').val()
+                + '                </button>'
+                + '            </div>'
+                + '        </div>'
+                + '    </div>'
+                + '    <div class="block2-txt p-t-20">'
+                + '        <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">'
+                + '            ' + resultProduit[i].NomProduit
+                + '        </a>'
+                + '       <span class="block2-price m-text6 p-r-5">'
+                + '           $' + currency(resultProduit[i].Valeur)
+                + '        </span>'
+                + '    </div>'
+                + ' </div>'
+                + '</div>'
+        }
+
+        $('#listeDesProduits').append(htmlResultAllProducts);
+        $('#quantiteProduits').text(listProduit.length);
+    } else {
+        $('#listeDesProduits').append(htmlResultAllProducts);
+    }
+}
+
+function ProductsByCategoryV2(idCategorie) {
+    
+    //console.log('ProductsByCategoryV2 categorie... ' + idCategorie);
+
+    $.cookie("CategorieIdTemporaire", idCategorie);
+
+    if (idCategorie === undefined || idCategorie === 0 || idCategorie === '') {
+        Loading();
+
+        $.ajax({
+            url: '/Product/ListeDeProduitsParCategorieTous',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+
+                $("#listeDesProduits").empty();
+
+                if (data.dataResult !== null) {
+                    listProduit = data.dataResult;
+                    $('#quantiteProduits').text(data.dataResult.length);
+                    PaginationProduits('');
+                }
+            },
+
+            error: function (erro) {
+                try {
+                    erro = JSON.parse(erro.responseText);
+                    sweetAlert($('#msgError').val(), erro.Message, 'error');
+
+                }
+                catch (err) {
+                    err = JSON.parse(err);
+                    sweetAlert($('#msgError').val(), erro.Message, 'error');
+                }
+
+                Loaded();
+            },
+
+            complete: function () {
+                //Quelque chose ici, si necessaire !!!
+                Loaded();
+            }
+        });
+    }
+
+    if (!isNaN(idCategorie) === true && Number(idCategorie) >0) {
+        Loading();
+
+        $.ajax({
+            url: '/Product/ListeDeProduitsParCategorie',
+            type: 'GET',
+            data: { "idCategorie": idCategorie },
+            dataType: 'json',
+            success: function (data) {
+
+                $("#listeDesProduits").empty();
+
+                if (data.dataResult !== null) {
+                    listProduit = data.dataResult;
+                    $('#quantiteProduits').text(data.dataResult.length);
+                    PaginationProduits('');
+                } 
+            },
+
+            error: function (erro) {
+                try {
+                    erro = JSON.parse(erro.responseText);
+                    sweetAlert($('#msgError').val(), erro.Message, 'error');
+
+                }
+                catch (erro) {
+                    erro = JSON.parse(erro);
+                    sweetAlert($('#msgError').val(), erro.Message, 'error');
+                }
+
+                Loaded();
+            },
+
+            complete: function () {
+                //Quelque chose ici, si necessaire !!!
+                Loaded();
+            }
+        });
+    }
+
 }
 
 //PAGE CHARIOT
@@ -452,8 +683,6 @@ function ChariotConsommateur(resultaChariotConsommateur) {
 
     if (resultaChariotConsommateur.responseJSON.dataResult.length > 0) {
 
-        //if (resultaChariotConsommateur.responseJSON.dataResult !== null || resultaChariotConsommateur.responseJSON.dataResult !== '' || resultaChariotConsommateur.responseJSON.dataResult.length > 0) {
-
             htmlResultChariotConsommateur = '<div class="container-table-cart pos-relative">'
                                                 + '<div class="wrap-table-shopping-cart bgwhite">'
                                                 + '  <table class="table-shopping-cart">'
@@ -499,19 +728,19 @@ function ChariotConsommateur(resultaChariotConsommateur) {
             htmlResultChariotConsommateur += '<div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm" id="chariotLivrasion">'
                                                 + '   <div class="flex-w flex-m w-full-sm">'
                                                 + '       <div class="size11 bo4 m-r-10">'
-                                                + '           <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="coupon-code" placeholder="Coupon Code">'
+                                                + '           <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="coupon-code" placeholder="' + $('#labelCodePromo').val() + '">'
                                                 + '       </div>'
                                                 + '       <div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">'
                                                 + '           <!-- Button -->'
                                                 + '           <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">'
-                                                + '               Apply coupon'
+                                                + '           ' + $('#labelAppliquerCoupon').val()
                                                 + '           </button>'
                                                 + '       </div>'
                                                 + '   </div>'
                                                 + '   <div class="size10 trans-0-4 m-t-10 m-b-10">'
                                                 + '       <!-- Button -->'
                                                 + '       <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">'
-                                                + '           Update Cart'
+                                                + '        ' + $('#labelMiseJourPanier').val()
                                                 + '       </button>'
                                                 + '   </div>'
                                                 + ' </div>'
@@ -607,7 +836,6 @@ function ChariotConsommateurPetit(resultaChariotConsommateur) {
     } else {
         $('#petitChariotConsommateurQte').text(0);
         $("#petitChariotConsommateur").empty();
-        $.cookie("chariotConsommateurProduit", null);
         for (var count = 0; count < resultaChariotConsommateur.responseJSON.dataResult.length; count++) {
 
             htmlResultChariotConsommateur += '<ul class="header-cart-wrapitem">'
@@ -702,7 +930,6 @@ function AjouterProduitChariot(idProduit) {
         success: function (data) {
 
             if (data.dataResult === true) {
-                //ChariotConsomateurPage();
                 var resultaChariotConsommateur = ChariotConsommateurProduits($.cookie('idConsommateurSession'));
                 ChariotConsommateurPetit(resultaChariotConsommateur);
             }
