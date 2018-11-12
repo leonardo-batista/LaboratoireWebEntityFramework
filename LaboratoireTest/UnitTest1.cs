@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace LaboratoireWebEntityFramework.Tests
+namespace LaboratoireTest
 {
     [TestClass]
     public class UnitTest1
