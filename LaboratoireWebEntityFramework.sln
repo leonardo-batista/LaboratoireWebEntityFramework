@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratoireWebEntityFramework", "LaboratoireWebEntityFramework\LaboratoireWebEntityFramework.csproj", "{B15CE045-F9BE-4B31-9338-9B57349A4FCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratoireWebEntityFramework.Tests", "LaboratoireWebEntityFramework.Tests\LaboratoireWebEntityFramework.Tests.csproj", "{B08AD73B-A77B-45CB-A27D-56B3EC75487E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebEntityFramework.Tests", "WebEntityFramework.Tests\WebEntityFramework.Tests.csproj", "{C103DE4A-DF6F-4571-BD64-5E85443C46DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{B15CE045-F9BE-4B31-9338-9B57349A4FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B15CE045-F9BE-4B31-9338-9B57349A4FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B15CE045-F9BE-4B31-9338-9B57349A4FCF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B08AD73B-A77B-45CB-A27D-56B3EC75487E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B08AD73B-A77B-45CB-A27D-56B3EC75487E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B08AD73B-A77B-45CB-A27D-56B3EC75487E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B08AD73B-A77B-45CB-A27D-56B3EC75487E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C103DE4A-DF6F-4571-BD64-5E85443C46DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C103DE4A-DF6F-4571-BD64-5E85443C46DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C103DE4A-DF6F-4571-BD64-5E85443C46DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C103DE4A-DF6F-4571-BD64-5E85443C46DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
