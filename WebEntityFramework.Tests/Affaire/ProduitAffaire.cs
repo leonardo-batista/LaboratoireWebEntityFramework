@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LaboratoireWebEntityFramework.Tests.DataContext
+namespace WebEntityFramework.Tests.Affaire
 {
-    public class ContextTest
+    public class ProduitAffaire
     {
+        public void Enrigestrer()
+        {
+
+        }
     }
 }

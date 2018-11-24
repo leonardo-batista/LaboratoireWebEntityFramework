@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LaboratoireTest")]
+[assembly: AssemblyTitle("WebEntityFramework.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LaboratoireTest")]
+[assembly: AssemblyProduct("WebEntityFramework.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c00ef9f8-f7c7-4c8b-af3c-201ec1babf90")]
+[assembly: Guid("c103de4a-df6f-4571-bd64-5e85443c46de")]
 
 // Version information for an assembly consists of the following four values:
 //
